@@ -1,0 +1,22 @@
+﻿@model Article.Core.Entities.Product
+@{
+    ViewBag.Title = "خرید مقاله";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6">
+        <div class="panel panel-warning" style="font-size: 1.5em; direction: rtl; margin: 15px;">
+            <div class="panel-heading">خرید مقاله</div>
+            <div class="panel-body">
+                این یک نمایش است برای خرید بایستی به درگاه بانکی متصل شد.
+            </div>
+            <div class="panel-footer">
+                <a href="@Url.Action("Download","Products",new{Id=Model.Id})" class="btn btn-success btn-continue">برای دانلود کلیک کنید</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3"></div>
+</div>
+

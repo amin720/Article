@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'BHoma';
+    src: url('../fonts/BHoma.eot?#') format('eot'), /* IE6–8 */
+    url('../fonts/BHoma.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/BHoma.ttf') format('truetype');
+    /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+.site-name,
+.site-name-info,
+ul,
+li,
+.menu-1,
+a,
+input[type="submit"],
+input[type="email"],
+input[type="text"],
+.display-tc,
+.btn,
+span,
+.tooltip,
+.tp-caption.LargeTitle {
+    font-family: BHoma, Arial, Helvetica, sans-serif !important;
+    letter-spacing: normal !important;
+}
+
+@media (min-width: 768px) {
+    .sticky .logo-small {
+        display: block!important;
+        position: absolute;
+        left: 0px;
+    }
+}
+
+.product-collateral, .product-collateral > .nav > li > a {
+    font-size: 1.2em !important;
+}
+
+.text-black,
+.text-black:hover,
+a.text-black,
+a.text-black:hover,
+a.text-black:focus {
+    color: #000000;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.product-view .product-name h1 {
+    text-align: right;
+}
+.availability, .product-brand {
+    float: right;
+    text-align: right;
+    direction: rtl;
+    font-size: 1.3em;
+}
+
+#nav > li {
+    float: right;
+}
+
+    #nav > li > a {
+        padding: 13px 35px;
+    }

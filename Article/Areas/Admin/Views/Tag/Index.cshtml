@@ -1,0 +1,162 @@
+﻿@model IEnumerable<Article.Core.Entities.Tag>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+
+    int counter = 1;
+}
+<!-- Section First -->
+<div class="row" dir="rtl">
+    <!-- Input Tags-->
+    <div id="divElm" class=" block col-sm-3" style="margin-left: 35px; margin-right: 25px; min-height: 50%;">
+        <!-- Input States Title -->
+        <div class="block-title">
+            <h2>وارد کردن بر چسب</h2>
+        </div>
+        <!-- END Input States Title -->
+        <!-- Input States Content -->
+        @*<form action="page_forms_components.html" method="post" class="form-horizontal form-bordered" onsubmit="return false;">*@
+        @*@using (Ajax.BeginForm("Create", "Tag", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "divElm" }, new { @class = "form-horizontal form-bordered" }))*@
+        @*@using (Html.BeginForm("Create", "Tag", new { ReturnUrl = ViewBag.ReturnUrl },
+                FormMethod.Post, new { @class = "form-horizontal form-bordered" }))
+            {*@
+        <form class="form-horizontal form-bordered">
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="Name">نام</label>
+                <div class="col-md-6">
+                    <input type="text" id="Name" name="Name" class="form-control" placeholder="..." disabled="disabled">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="Slug">نامک</label>
+                <div class="col-md-6">
+                    <input type="text" id="Slug" name="Slug" class="form-control" placeholder="..." disabled="disabled">
+                </div>
+            </div>
+            <div class="form-group form-actions">
+                <div class="col-md-9 col-md-offset-3">
+                    <button type="submit" id="createBtn" class="btn btn-effect-ripple btn-primary">ثبت</button>
+                </div>
+            </div>
+        </form>
+        @*}*@
+        <!-- END Input States Content -->
+    </div>
+    <!-- END Input Tags-->
+    <!-- Datatables Block -->
+    <!-- Datatables is initialized in js/pages/uiTables.js -->
+    <div class="block full col-sm-8">
+        <div class="block-title">
+            <h2>بر چسب ها</h2>
+        </div>
+        <div class="table-responsive" dir="ltr">
+            <table id="example-datatable" class="table table-striped table-bordered table-vcenter">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width: 50px;">شماره</th>
+                        <th class="text-center">نام</th>
+                        <th class="text-center">نامک</th>
+                        <th style="width: 120px;">تعداد استفاده شده</th>
+                        <th class="text-center" style="width: 75px;"><i class="fa fa-flash"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tag in Model)
+                    {
+                        <tr class="text-center">
+                            <td>@counter</td>
+                            <td><strong>@tag.Name</strong></td>
+                            <td>@tag.Slug</td>
+                            <td><span class="label label-info">@tag.Count</span></td>
+                            <td>
+                                <a href="@Url.Action("Edit","Tag",new {tag = tag})" id="editJs" data-toggle="tooltip" title="Edit Tag" class="btn btn-effect-ripple btn-xs btn-success"><i class="fa fa-pencil"></i></a>
+                                @*<a href="@Url.Action("Delete","Tag",new {tag = tag})" data-action="delete" data-value=@tag data-toggle="tooltip" title="Delete Tag" class="btn btn-effect-ripple btn-xs btn-danger"><i class="fa fa-times"></i></a>*@
+                                <a href="@Url.Action("Delete","Tag",new {tag = tag})" data-toggle="tooltip" title="Delete Tag" class="btn btn-effect-ripple btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>counter++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Block -->
+</div>
+<!-- END Section First -->
+<!-- Add Contact Modal -->
+@*<div id="modal-edit-tag" class="modal fade" tabdashboard="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" dir="rtl">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title"><i class="fa fa-plus"></i> <strong>ویرایش برچسب</strong></h3>
+                </div>
+                <div class="modal-body" id="divElm">
+                    @using (Ajax.BeginForm("Edit", "Tag", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "divElm" }, new { @class = "form-horizontal form-bordered" }))
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.Hidden("tag", Model)
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="edit-tag-name">نام</label>
+                            <div class="col-xs-9">
+                                @Html.TextBox("newTag", Model, new { @type = "text", @id = "edit-tag-name", @name = "edit-tag-name", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>*@
+<!-- END Add Contact Modal -->
+@section Tag{
+
+    <script type="text/javascript">
+        $(function() {
+            $("#createBtn").click(function() {
+                var tag = {};
+                tag.Name = $("#Name").val();
+                tag.Slug = $("#Slug").val();
+
+                $.ajax({
+                    type: "POST",
+                    data: '{tag: ' + JSON.stringify(tag)  + ' }',
+                    dataType: "json",
+                    url: "/Admin/Tag/Create",
+                    success: function(response) {
+                        alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
+                    },
+                    failure: function(response) {
+                        alert(response.responseText);
+                    },
+                    error: function(response) {
+                        $("#testT").html("Error on sending or receiving data!");
+                        alert(response.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Load and execute javascript code used only in this page -->
+
+    <script src="~/Areas/Admin/Scripts/js/pages/uiTables.js"></script>
+    <script>
+        $(function() {
+            UiTables.init();
+        });
+    </script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/Areas/Admin/Scripts/js/pages/formsComponents.js"></script>
+    <script>
+        $(function() {
+            FormsComponents.init();
+        });
+    </script>
+}

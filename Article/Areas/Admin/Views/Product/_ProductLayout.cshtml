@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+}
+
+<p>
+    @Html.ActionLink("ایجاد یک محصول جدید", "Create", "Product", new { Area = "admin" })
+</p>
+
+@RenderBody()
+
+@section Product{
+    
+
+    <!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
+    <script src="~/Areas/Admin/Scripts/js/plugins/ckeditor/ckeditor.js"></script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/Areas/Admin/Scripts/js/pages/formsComponents.js"></script>
+    <script>
+        $(function () {
+            FormsComponents.init();
+        });
+    </script>
+}

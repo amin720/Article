@@ -1,0 +1,906 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FA92EF80-733B-48DF-9EFD-5B7423E1D909}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Article</RootNamespace>
+    <AssemblyName>Article</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Content\css\bootstrap.rtl.css" />
+    <Content Include="Areas\Admin\Content\css\bootstrap.rtl.min.css" />
+    <Content Include="Areas\Admin\Content\css\fonts\fontawesome\fontawesome-webfont.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.filetypes.pro\glyphicons-filetypes-regular.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.halflings.pro\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.pro\glyphicons-regular.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.social.pro\glyphicons-social-regular.svg" />
+    <Content Include="Areas\Admin\Content\css\jquery-ui.min.css" />
+    <Content Include="Areas\Admin\Content\css\main.css" />
+    <Content Include="Areas\Admin\Content\css\plugins.css" />
+    <Content Include="Areas\Admin\Content\css\themes.css" />
+    <Content Include="Areas\Admin\Content\css\themes\amethyst.css" />
+    <Content Include="Areas\Admin\Content\css\themes\classy.css" />
+    <Content Include="Areas\Admin\Content\css\themes\creme.css" />
+    <Content Include="Areas\Admin\Content\css\themes\flat.css" />
+    <Content Include="Areas\Admin\Content\css\themes\passion.css" />
+    <Content Include="Areas\Admin\Content\css\themes\social.css" />
+    <Content Include="Areas\Admin\Content\img\favicon.png" />
+    <Content Include="Areas\Admin\Content\img\icon114.png" />
+    <Content Include="Areas\Admin\Content\img\icon120.png" />
+    <Content Include="Areas\Admin\Content\img\icon144.png" />
+    <Content Include="Areas\Admin\Content\img\icon152.png" />
+    <Content Include="Areas\Admin\Content\img\icon180.png" />
+    <Content Include="Areas\Admin\Content\img\icon57.png" />
+    <Content Include="Areas\Admin\Content\img\icon72.png" />
+    <Content Include="Areas\Admin\Content\img\icon76.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.chosen\chosen-sprite%402x.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.chosen\chosen-sprite.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.colorpicker\alpha-horizontal.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.colorpicker\alpha.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.colorpicker\hue-horizontal.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.colorpicker\hue.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.colorpicker\saturation.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_asc%402x.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_asc.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_asc_disabled%402x.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_asc_disabled.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_both%402x.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_both.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_desc%402x.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_desc.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_desc_disabled%402x.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.datatables\sort_desc_disabled.png" />
+    <Content Include="Areas\Admin\Content\img\jquery.easytree\icons.gif" />
+    <Content Include="Areas\Admin\Content\img\jquery.easytree\loading.gif" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar1%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar1.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar10%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar10.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar11%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar11.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar12%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar12.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar13%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar13.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar14%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar14.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar15%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar15.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar16%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar16.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar2%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar2.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar3%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar3.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar4%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar4.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar5%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar5.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar6%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar6.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar7%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar7.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar8%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar8.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar9%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\avatar9.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\avatars\readme.txt" />
+    <Content Include="Areas\Admin\Content\img\placeholders\layout\error_full_bg.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\layout\lock_full_bg.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\layout\login2_full_bg.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\layout\socialnet_header.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo1%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo1.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo10%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo10.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo11%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo11.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo12%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo12.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo13%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo13.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo14%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo14.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo15%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo15.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo16%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo16.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo17%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo17.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo18%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo18.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo19%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo19.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo2%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo2.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo20%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo20.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo21%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo21.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo22%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo22.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo23%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo23.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo24%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo24.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo3%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo3.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo4%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo4.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo5%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo5.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo6%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo6.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo7%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo7.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo8%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo8.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo9%402x.jpg" />
+    <Content Include="Areas\Admin\Content\img\placeholders\photos\photo9.jpg" />
+    <Content Include="Areas\Admin\Scripts\js\admin.js" />
+    <Content Include="Areas\Admin\Scripts\js\app.js" />
+    <Content Include="Areas\Admin\Scripts\js\jquery-ui.min.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\appEmail.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\appMedia.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\appSocial.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\compAnimations.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\compCalendar.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\compCharts.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\compGallery.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\compMaps.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\compNestable.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\compTodo.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\compTree.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\formsComponents.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\formsValidation.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\formsWizard.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\readyDashboard.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\readyLogin.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\readyRegister.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\readyReminder.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\readyTickets.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\readyTimeline.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\uiIcons.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\uiProgress.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\uiTables.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\uiTypography.js" />
+    <Content Include="Areas\Admin\Scripts\js\pages\uiWidgets.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\adapters\jquery.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\build-config.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\ckeditor.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\config.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\contents.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\lang\en.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\af.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\de-ch.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\en-gb.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\eu.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fo.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\tt.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\colordialog\dialogs\colordialog.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\icons.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\magicline\images\hidpi\icon-rtl.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\magicline\images\icon-rtl.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\preview\preview.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\angel_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\angry_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\broken_heart.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\confused_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\cry_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\devil_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\embarrassed_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\envelope.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\heart.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\kiss.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\lightbulb.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\omg_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\regular_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\sad_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\shades_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\teeth_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\thumbs_down.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\thumbs_up.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\tongue_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\smiley\images\wink_smile.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\da.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\de-ch.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\eu.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\ko.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\lt.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\templates\dialogs\templates.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\css\samples.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\img\github-top.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\img\header-bg.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\img\header-separator.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\img\logo.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\img\navigation-tip.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\index.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\js\sample.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\js\sf.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\ajax.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\api.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\appendto.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\assets\inlineall\logo.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\assets\posteddata.php" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\assets\sample.jpg" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\assets\uilanguages\languages.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\datafiltering.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\dialog\assets\my_dialog.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\dialog\dialog.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\divreplace.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\enterkey\enterkey.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\htmlwriter\outputforflash.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\htmlwriter\outputhtml.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\index.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\inlineall.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\inlinebycode.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\inlinetextarea.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\jquery.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\magicline\magicline.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\readonly.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\replacebyclass.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\replacebycode.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\sample.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\sample.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\sample_posteddata.php" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\tabindex.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\toolbar\toolbar.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\uicolor.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\uilanguages.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\wysiwygarea\fullpage.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\xhtmlstyle.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\css\fontello.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\font\fontello.svg" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\font\LICENSE.txt" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\index.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\js\abstracttoolbarmodifier.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\js\fulltoolbareditor.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\js\toolbarmodifier.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\js\toolbartextmodifier.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\lib\codemirror\codemirror.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\lib\codemirror\codemirror.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\lib\codemirror\javascript.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\lib\codemirror\neo.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\lib\codemirror\show-hint.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\lib\codemirror\show-hint.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_ie.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_ie7.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_ie8.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_iequirks.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_opera.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\editor.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_gecko.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_ie.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_ie7.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_ie8.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_iequirks.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\dialog.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\dialog_ie.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\dialog_ie7.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\dialog_ie8.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\dialog_iequirks.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\dialog_opera.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\editor.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\editor_gecko.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\editor_ie.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\editor_ie7.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\editor_ie8.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\editor_iequirks.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\icons.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\icons_hidpi.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\images\arrow.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\images\close.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\images\hidpi\close.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\images\hidpi\lock-open.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\images\hidpi\lock.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\images\hidpi\refresh.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\images\lock-open.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\images\lock.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\images\refresh.png" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\sample\bootstrapck-sample.html" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\sample\js\analytics.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\styles.js" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\gmaps.min.js" />
+    <Content Include="Areas\Admin\Scripts\js\vendor\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Scripts\js\vendor\bootstrap.rtl.js" />
+    <Content Include="Areas\Admin\Scripts\js\vendor\bootstrap.rtl.min.js" />
+    <Content Include="Areas\Admin\Scripts\js\vendor\jquery-2.2.4.min.js" />
+    <Content Include="Areas\Admin\Scripts\js\vendor\modernizr-3.3.1.min.js" />
+    <Content Include="assets\css\animate.css" />
+    <Content Include="assets\css\blogmate.css" />
+    <Content Include="assets\css\bootstrap-rtl.min.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\bootstrap.rtl.css" />
+    <Content Include="assets\css\cloudzoom.css" />
+    <Content Include="assets\css\custom.css" />
+    <Content Include="assets\css\fancybox.css" />
+    <Content Include="assets\css\flexslider.css" />
+    <Content Include="assets\css\font-awesome.css" />
+    <Content Include="assets\css\jquery.fancybox.css" />
+    <Content Include="assets\css\owl.carousel.css" />
+    <Content Include="assets\css\owl.theme.css" />
+    <Content Include="assets\css\revslider.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\images\article-1.jpg" />
+    <Content Include="assets\images\article-2.jpg" />
+    <Content Include="assets\images\article-3.jpg" />
+    <Content Include="assets\images\article-4.jpg" />
+    <Content Include="assets\images\article-5.jpg" />
+    <Content Include="assets\images\article-6.jpg" />
+    <Content Include="assets\images\article-7.jpg" />
+    <Content Include="assets\images\article-8.jpg" />
+    <Content Include="assets\images\avatar60x60.jpg" />
+    <Content Include="assets\images\bkg_rating.png" />
+    <Content Include="assets\images\blog-img1.jpg" />
+    <Content Include="assets\images\btn_remove.png" />
+    <Content Include="assets\images\category-banner1.jpg" />
+    <Content Include="assets\images\close_icon.png" />
+    <Content Include="assets\images\custom-img1.jpg" />
+    <Content Include="assets\images\custom-img2.jpg" />
+    <Content Include="assets\images\custom-img3.jpg" />
+    <Content Include="assets\images\custom-img4.jpg" />
+    <Content Include="assets\images\english.png" />
+    <Content Include="assets\images\fancybox_close-mega.png" />
+    <Content Include="assets\images\fancybox_overlay.png" />
+    <Content Include="assets\images\fancybox_sprite.png" />
+    <Content Include="assets\images\francais.png" />
+    <Content Include="assets\images\german.png" />
+    <Content Include="assets\images\icon_arrow_down.png" />
+    <Content Include="assets\images\icon_arrow_up.png" />
+    <Content Include="assets\images\icon_dsc.png" />
+    <Content Include="assets\images\icon_dsc_over.png" />
+    <Content Include="assets\images\icon_grid.png" />
+    <Content Include="assets\images\icon_grid_act.png" />
+    <Content Include="assets\images\icon_list.png" />
+    <Content Include="assets\images\icon_list_act.png" />
+    <Content Include="assets\images\jewelry-banner.jpg" />
+    <Content Include="assets\images\left-a.png" />
+    <Content Include="assets\images\leftNav.png" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\menu-sunglass.png" />
+    <Content Include="assets\images\minus.png" />
+    <Content Include="assets\images\nav-img1.jpg" />
+    <Content Include="assets\images\offer-banner1.jpg" />
+    <Content Include="assets\images\payment-1.png" />
+    <Content Include="assets\images\payment-2.png" />
+    <Content Include="assets\images\payment-3.png" />
+    <Content Include="assets\images\payment-4.png" />
+    <Content Include="assets\images\pen.jpg" />
+    <Content Include="assets\images\plus-img.png" />
+    <Content Include="assets\images\plus.png" />
+    <Content Include="assets\images\rhs-banner.jpg" />
+    <Content Include="assets\images\right-a.png" />
+    <Content Include="assets\images\search-icon.png" />
+    <Content Include="assets\images\signal.png" />
+    <Content Include="assets\images\slide-img1.jpg" />
+    <Content Include="assets\images\slide-img2.jpg" />
+    <Content Include="assets\images\to-top-arrow.png" />
+    <Content Include="assets\images\top-arrow.png" />
+    <Content Include="assets\js\bootstrap.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\bootstrap.rtl.js" />
+    <Content Include="assets\js\cloudzoom.js" />
+    <Content Include="assets\js\common.js" />
+    <Content Include="assets\js\jquery.fancybox.js" />
+    <Content Include="assets\js\jquery.jcarousel.min.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\js\owl.carousel.js" />
+    <Content Include="assets\js\owl.carousel.min.js" />
+    <Content Include="assets\js\parallax.js" />
+    <Content Include="assets\js\revslider.js" />
+    <Content Include="assets\js\toggle.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthDbConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TagController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Services\UserService.cs" />
+    <Compile Include="Areas\Admin\ViewModels\AdminMenuItem.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CategoryViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DashboardViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ProductViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserViewModel.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Extensions.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ProductsManagerViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Content\css\fonts\BYekan.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\BYekan.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\BYekan.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\fontawesome\fontawesome-webfont.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\fontawesome\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\fontawesome\fontawesome-webfont.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\fontawesome\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Admin\Content\css\fonts\fontawesome\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.filetypes.pro\glyphicons-filetypes-regular.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.filetypes.pro\glyphicons-filetypes-regular.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.filetypes.pro\glyphicons-filetypes-regular.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.halflings.pro\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.halflings.pro\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.halflings.pro\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.pro\glyphicons-regular.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.pro\glyphicons-regular.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.pro\glyphicons-regular.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.social.pro\glyphicons-social-regular.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.social.pro\glyphicons-social-regular.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\glyphicons.social.pro\glyphicons-social-regular.woff" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\CHANGES.md" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\LICENSE.md" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\scayt\CHANGELOG.md" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\README.md" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\font\config.json" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\font\fontello.eot" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\font\fontello.ttf" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\readme.md" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\editor_ie7.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\dialog_ie8.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\editor_ie8.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\dialog_iequirks.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\editor_iequirks.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie\dialog_ie.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie\editor_ie.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\opera\dialog_opera.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\editor.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\_colorpanel.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\_elementspath.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\_mainui.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\_menu.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\_panel.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\_presets.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\_reset.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\_richcombo.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\components\_toolbar.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\config\_colors.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
+    <Content Include="Areas\Admin\Scripts\js\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
+    <Content Include="Areas\Admin\Views\Admin\AdminMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Forgotpassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\RecoveryPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\_menuLink.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\_productForm.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\_ProductLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TagEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdminPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Tag\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Tag\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Tag\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="assets\fonts\BHoma.eot" />
+    <Content Include="assets\fonts\BHoma.ttf" />
+    <Content Include="assets\fonts\BHoma.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Products\Single.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Products\Buy.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="assets\files\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Article.Core\Article.Core.csproj">
+      <Project>{27bce619-fe5f-40e0-9ca6-520c4f0c9032}</Project>
+      <Name>Article.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Article.Infrastructure\Article.Infrastructure.csproj">
+      <Project>{2b02a9ec-b14e-4db8-ae03-2f82eddee599}</Project>
+      <Name>Article.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>38919</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:38919/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,157 @@
+﻿@model IEnumerable<Article.Core.Entities.UserIdentity>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+}
+
+
+@AntiForgery.GetHtml()
+
+<!-- Contacts Header -->
+<div class="content-header">
+    <div class="row">
+        <div class="col-sm-6 hidden-xs">
+            <div class="header-section">
+                <ul class="breadcrumb breadcrumb-top">
+                    <li><a href="">کاربران</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="header-section">
+                <h1>کاربران</h1>
+            </div>
+        </div>
+    </div>
+    <div class="text-center border-top push-inner-top-bottom">
+        <!--<a href="#modal-add-contact" class="btn btn-sm btn-success" data-toggle="modal"><i class="fa fa-plus"></i></a>-->
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">الف</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ب</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">پ</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ت</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ث</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ج</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">چ</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ح</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">خ</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">د</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ذ</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ر</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ز</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ژ</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ط</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ظ</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ف</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ق</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ک</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">گ</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">ع</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">غ</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">U</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">W</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">X</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">Y</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-default">Z</a>
+    </div>
+</div>
+<!-- END Contacts Header -->
+<!-- Contacts Content -->
+<div class="row">
+    @foreach (var user in Model)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <a href="@Url.Action("Edit","User",routeValues: new { username = user.UserName })" class="widget">
+                <div class="widget-content text-right clearfix">
+                    <img src="~/Areas/Admin/Content/img/placeholders/avatars/avatar9.jpg" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar pull-left">
+                    <h3 class="widget-heading h4"><strong>@user.DisplayName</strong></h3>
+                    <!--<span class="text-muted">Copywriter</span>-->
+                    <!--<a href="#modal-add-contact" class="btn btn-sm btn-success" data-toggle="modal"><span class="fa fa-plus"></span></a>-->
+                </div>
+            </a>
+        </div>
+
+    }
+</div>
+<!-- END Contacts Content -->
+
+
+@section ModelUsers
+{
+    <!-- Add Contact Modal -->
+    @*<div id="modal-add-contact" class="modal fade" tabDashboard="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" dir="rtl">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title"><i class="fa fa-plus"></i> <strong>اطلاعات فرد</strong></h3>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal form-bordered" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="DisplayName">نام کاربری</label>
+                            <div class="col-xs-9">
+                                <input type="text" id="UserName" name="UserName" class="form-control" placeholder="نام کاربری" value="@Model.UserName" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="DisplayName">نام</label>
+                            <div class="col-xs-9">
+                                <input type="text" id="DisplayName" name="DisplayName" class="form-control" placeholder="نام کامل" value="@Model.DisplayName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="Email">ایمیل</label>
+                            <div class="col-xs-9">
+                                <input type="email" id="Email" name="Email" class="form-control" placeholder="ایمیل" value="@Model.Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="DisplayName">رمز عبور فعلی</label>
+                            <div class="col-xs-9">
+                                <input type="text" id="CurrentPassword" name="CurrentPassword" class="form-control" placeholder="نام کاربری" value="@Model.CurrentPassword">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="DisplayName">رمز عبور جدید</label>
+                            <div class="col-xs-9">
+                                <input type="text" id="NewPassword" name="NewPassword" class="form-control" placeholder="نام کاربری" value="@Model.NewPassword">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="DisplayName">تکرار رمز عبور جدید</label>
+                            <div class="col-xs-9">
+                                <input type="text" id="ConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="نام کاربری" value="@Model.ConfirmPassword">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="DisplayName">نقش</label>
+                            <div class="col-xs-9">
+                                <select id="SelectedRole" name="SelectedRole" class="select-select2" style="width: 100%;" data-placeholder="@Model.SelectedRole">*@
+    @* <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->*@
+    @*@foreach (var role in Model.Roles)
+                                        {
+                                            <option value="@role.Text">@role.Text</option>
+                                        }
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button type="submit" class="btn btn-effect-ripple btn-success">ویرایش</button>
+                                    <a href="@Url.Action("Delete","User", routeValues: Model.UserName)" class="btn btn-effect-ripple btn-danger">حذف</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <!-- END Add Contact Modal -->
+}
+
+
+

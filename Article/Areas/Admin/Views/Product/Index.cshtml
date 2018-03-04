@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Article.Core.Entities.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+}
+
+<!-- eStore Header -->
+@*<div class="content-header">
+        <div class="header-section">
+            <form action="page_app_estore.html" method="post" class="form-horizontal" onsubmit="return false;">
+                <div class="form-group">
+                    <div class="col-sm-8 push-bit">
+                        <input type="text" id="search-term" name="search-term" class="form-control" placeholder="جستجو محصولات ...">
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="csscheckbox csscheckbox-primary">
+                            <input type="checkbox" id="estore-new" name="estore-new" checked><span></span>
+                        </label>
+                        <label for="estore-new" class="push-right">New Arrivals</label>
+                        <label class="csscheckbox csscheckbox-primary">
+                            <input type="checkbox" id="estore-offers" name="estore-offers" checked><span></span>
+                        </label>
+                        <label for="estore-offers">Offers</label>
+                    </div>
+                </div>
+                <div class="form-group remove-margin-bottom">
+                    <div class="col-sm-8 push-bit">
+                        <select id="estore-categories" name="estore-categories" class="select-chosen" data-placeholder="انتخاب محصولات ..." style="width: 250px;" multiple>
+                            <option value="travel" selected>Travel</option>
+                            <option value="experiences" selected>Experiences</option>
+                            <option value="gifts">Gifts</option>
+                            <option value="tech">Technology</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-effect-ripple btn-effect-ripple btn-primary"><i class="fa fa-search"></i> پیدا کردن چیزی بزرگ برای من </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>*@
+<!-- END eStore Header -->
+<!-- eStore Content -->
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-4" dir="rtl">
+            <a href="@Url.Action("Edit","Product",new{ productId = product.Id})" class="widget animation-fadeInQuick">
+                <div class="widget-image widget-image-xs">
+                    <img src="@Url.Content(product.ImageUrl)" alt="@product.NamePersian">
+                    <div class="widget-image-content">
+                        @if (product.Discount != null )
+                        {
+                            <div class="pull-right text-danger">
+                                <strong>تخفیف !</strong>
+                            </div>
+                        }
+                        <h2 class="widget-heading text-light">
+                            <strong>@product.NamePersian</strong>
+                        </h2>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div class="row">
+                        <div class="col-xs-4 text-right">
+                            <h2><span class="text-muted">تومان</span> <strong>@product.Price</strong></h2>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="text-muted"><em>SKU:</em> @product.SKU </div>
+                            <div class="text-dark push-bit">@product.AuthorName نویسنده</div>
+                            @*@Html.ActionLink("Delete", "Delete", new { id = product.Id }, new { data_action = "delete", data_value = product.Name })*@
+                            @*<div class="text-warning" dir="ltr">
+                                <i class="fa fa-2x fa-star"></i>
+                                <i class="fa fa-2x fa-star"></i>
+                                <i class="fa fa-2x fa-star"></i>
+                                <i class="fa fa-2x fa-star"></i>
+                                <i class="fa fa-2x fa-star-half-o"></i>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+                @*@Html.ActionLink("Delete", "Delete", new { id = product.Id }, new { data_action = "delete", data_value = product.Name,@class="btn btn-danger" })*@
+            </a>
+            @*<a href="@Url.Action("Delete","Product",new{productId = product.Id })" data-action = "delete", data-value = @product.Name class="btn btn-danger">Delete:<em>@product.Name</em></a>*@
+            <a href="@Url.Action("Delete","Product",new{productId = product.Id })" class="btn btn-danger">Delete:<em>@product.NamePersian</em></a>
+
+        </div>
+    }
+</div>
+<!-- END eStore Content -->

@@ -1,0 +1,17 @@
+﻿@model Article.Core.Entities.UserIdentity
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+}
+
+<h2>Delete @Model.UserName</h2>
+
+@using (var frm = Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Hidden("username", Model.Id)
+
+    <input type="submit" value="Delete @Model.UserName" class="btn btn-danger btn-lg" />
+}

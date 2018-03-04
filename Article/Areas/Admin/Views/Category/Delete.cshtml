@@ -1,0 +1,36 @@
+﻿@model Article.Core.Entities.Category
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+}
+
+<h2>Delete <strong>@Model.Name</strong></h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Hidden("cat", Model.Id)
+
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="Name">نام</label>
+            <div class="col-md-9">
+                <input type="text" id="Name" name="Name" class="form-control" placeholder="..." value="@Model.Name" disabled="disabled">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="پاک شود؟" class="btn btn-lg btn-danger" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<div>
+    @Html.ActionLink("بازگشت به صفحه دسته بندی", "Index", new { @class = "btn btn-lg btn-info" })
+</div>

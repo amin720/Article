@@ -1,0 +1,476 @@
+﻿@model Article.ViewModels.ProductsManagerViewModel
+@{
+    ViewBag.Title = "صفحه اصلی";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Slider -->
+<div id="magik-slideshow" class="magik-slideshow">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-12 col-md-8 wow bounceInUp animated">
+                <div id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container'>
+                    <div id='rev_slider_4' class='rev_slider fullwidthabanner'>
+                        <ul>
+                            <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='~/assets/images/slider_img_2.jpg'>
+                                <img src='~/assets/images/article-8.jpg' data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
+                                <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='45' data-y='30' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
+                                     style='z-index:2; white-space:nowrap;'>مقاله های برتر</div>
+                                <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='45' data-y='70' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
+                                     style='z-index:3; white-space:nowrap;'>مقاله های برتر حهانی</div>
+                                <div class='tp-caption sfb  tp-resizeme ' data-x='45' data-y='360' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><a href='#' class="view-more">نمایش تمام امکانات</a> </div>
+                                <div class='tp-caption Title sft  tp-resizeme ' data-x='45' data-y='130' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
+                                     style='z-index:4; white-space:nowrap;'>ترجمه کامل بدون هیچ اشکال فنی و نگارشی</div>
+                                <div class='tp-caption Title sft  tp-resizeme ' data-x='45' data-y='400' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
+                                     style='z-index:4; white-space:nowrap;font-size:11px'>همه را از ما بخواهید</div>
+                            </li>
+                            <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='~/assets/images/slider_img_2.jpg' class="black-text">
+                                <img src='~/assets/images/article-7.jpg' data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
+                                <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='45' data-y='30' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
+                                     style='z-index:2; white-space:nowrap;'>مقاله های برتر</div>
+                                <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='45' data-y='70' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
+                                     style='z-index:3; white-space:nowrap;'>مقاله های برتر ایرانی</div>
+                                <div class='tp-caption sfb  tp-resizeme ' data-x='45' data-y='360' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><a href='#' class="view-more">نمایش تمام امکانات</a></div>
+                                <div class='tp-caption Title sft  tp-resizeme ' data-x='45' data-y='130' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
+                                     style='z-index:4; white-space:nowrap;'>اجازه مستقیم و بدون هیچ نقص قانونی</div>
+                                <div class='tp-caption Title sft  tp-resizeme ' data-x='45' data-y='400' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
+                                     style='z-index:4; white-space:nowrap;font-size:11px'>همه را از ما بخواهید</div>
+                            </li>
+                        </ul>
+                        <div class="tp-bannertimer"></div>
+                    </div>
+                </div>
+            </div>
+            <aside class="col-xs-12 col-sm-12 col-md-4 wow bounceInUp animated">
+                <div class="RHS-banner">
+                    <div class="add">
+                        <a href="#"><img alt="banner-img" src="~/assets/images/article-4.jpg" width="360" height="458"></a>
+                        <div class="overlay"><a class="info" href="#">اطلاعات بیشتر</a></div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+<!-- end Slider -->
+<!-- main container -->
+
+<section class="main-container col1-layout home-content-container">
+    <div class="container">
+        <div class="std">
+            <div class="best-seller-pro wow bounceInUp animated">
+                <div class="slider-items-products">
+                    <div class="new_title center">
+                        <h2>پر فروش ترین محصولات</h2>
+                    </div>
+                    <div id="best-seller-slider" class="product-flexslider hidden-buttons">
+                        <div class="slider-items slider-width-col4">
+
+                            @foreach (var item in Model.BestSeller)
+                            {
+                                <!-- Item -->
+                                <div class="item">
+                                    <div class="col-item">
+                                        @if (item.Discount != null && item.Discount == 0)
+                                        {
+                                            <div class="sale-label sale-top-right">حراج</div>
+                                        }
+                                        <div class="product-image-area">
+                                            <a class="product-image" title="@item.NamePersian" href="@Url.Action("Single","Products",new{Id = item.Id})"> <img src="@Url.Content(item.ImageUrl)" class="img-responsive" alt="a" /> </a>
+                                            <div class="actions-links">
+                                                <span class="add-to-links"> <a title="magik-btn-quickview" class="magik-btn-quickview" href="@Url.Action("Single","Products",new{Id = item.Id})"><span>مشاهده مقاله</span></a> @*<a title="Add to Wishlist" class="link-wishlist" href="http://bit.do/bromq"><span>Add to Wishlist</span></a> <a title="Add to Compare" class="link-compare" href="compare.html"><span>Add to Compare</span></a>*@</span>
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="info-inner">
+                                                <div class="item-title">
+                                                    <a title=" Sample Products" href="@Url.Action("Single","Products",new{Id = item.Id})"> @item.NamePersian </a>
+                                                </div>
+                                                <!--item-title-->
+                                                <div class="item-content">
+                                                    @*<div class="ratings">
+                                                            <div class="rating-box">
+                                                                <div class="rating"></div>
+                                                            </div>
+                                                        </div>*@
+                                                    @if (item.Discount != null && item.Discount == 0)
+                                                    {
+                                                        <div class="price-box">
+                                                            <p class="special-price">
+                                                                <span class="price"> @item.Discount تومان</span>
+                                                            </p>
+                                                            <p class="old-price">
+                                                                <span class="price-sep">-</span> <span class="price"> @item.Price تومان</span>
+                                                            </p>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="price-box">
+                                                            <span class="regular-price"> <span class="price">@item.Price تومان</span> </span>
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                                <!--item-content-->
+                                            </div>
+                                            <!--info-inner-->
+                                            @*<div class="actions">
+                                                    <button type="button" title="Add to Cart" class="button btn-cart"><span>Add to Cart</span></button>
+                                                </div>*@
+                                            <!--actions-->
+
+                                            <div class="clearfix"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Item -->
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End main container -->
+<!-- offer banner section -->
+
+<div class="offer-banner-section wow bounceInUp animated">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-xs-12 col-sm-4">
+                <a href="#"><img alt="offer banner1" src="~/assets/images/article-1.jpg" width="370" height="278"></a>
+                <div class="overlay"><a class="info" href="#">اطلاعات بیشتر</a></div>
+            </div>
+            <div class="col-lg-4 col-xs-12 col-sm-4">
+                <a href="#"><img alt="offer banner2" src="~/assets/images/article-3.jpg" width="370" height="278"></a>
+                <div class="overlay"><a class="info" href="#">اطلاعات بیشتر</a></div>
+            </div>
+            <div class="col-lg-4 col-xs-12 col-sm-4">
+                <a href="#"><img alt="offer banner3" src="~/assets/images/article-2.jpg" width="370" height="278"></a>
+                <div class="overlay"><a class="info" href="#">اطلاعات بیشتر</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end offer banner section -->
+<!-- Featured Slider -->
+<section class="featured-pro container wow bounceInUp animated">
+    <div class="slider-items-products">
+        <div class="new_title center">
+            <h2>محصولات رایگان</h2>
+        </div>
+        <div id="featured-slider" class="product-flexslider hidden-buttons">
+            <div class="slider-items slider-width-col4">
+
+                @foreach (var item in Model.FreeProducts)
+                {
+                    <!-- Item -->
+                    <div class="item">
+                        <div class="col-item">
+                            @if (item.Discount != null && item.Discount == 0)
+                            {
+                                <div class="sale-label sale-top-right">حراج</div>
+                            }
+                            <div class="product-image-area">
+                                <a class="product-image" title="@item.NamePersian" href="@Url.Action("Single","Products",new{Id = item.Id})"> <img src="@Url.Content(item.ImageUrl)" class="img-responsive" alt="a" /> </a>
+                                <div class="actions-links">
+                                    <span class="add-to-links"> <a title="مشاهده مقاله" class="magik-btn-quickview" href="@Url.Action("Single","Products",new{Id = item.Id})"><span>مشاهده مقاله</span></a> @*<a title="Add to Wishlist" class="link-wishlist" href="http://bit.do/bromq"><span>Add to Wishlist</span></a> <a title="Add to Compare" class="link-compare" href="compare.html"><span>Add to Compare</span></a>*@</span>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <div class="info-inner">
+                                    <div class="item-title">
+                                        <a title=" Sample Products" href="@Url.Action("Single","Products",new{Id = item.Id})"> @item.NamePersian </a>
+                                    </div>
+                                    <!--item-title-->
+                                    <div class="item-content">
+                                        @*<div class="ratings">
+                                                <div class="rating-box">
+                                                    <div class="rating"></div>
+                                                </div>
+                                            </div>*@
+                                        @if (item.Discount != null && item.Discount == 0)
+                                        {
+                                            <div class="price-box">
+                                                <p class="special-price">
+                                                    <span class="price"> @item.Discount تومان</span>
+                                                </p>
+                                                <p class="old-price">
+                                                    <span class="price-sep">-</span> <span class="price"> @item.Price تومان</span>
+                                                </p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="price-box">
+                                                <span class="regular-price"> <span class="price">@item.Price تومان</span> </span>
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <!--item-content-->
+                                </div>
+                                <!--info-inner-->
+                                @*<div class="actions">
+                                        <button type="button" title="Add to Cart" class="button btn-cart"><span>Add to Cart</span></button>
+                                    </div>*@
+                                <!--actions-->
+
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Item -->
+
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Featured Slider -->
+<!-- promo banner section -->
+<div class="promo-banner-section container wow bounceInUp animated">
+    <div class="row">
+        <div class="col-lg-12"> <img alt="promo-banner3" src="~/assets/images/article-5.jpg" width="1140" height="149"></div>
+    </div>
+</div>
+<!-- End promo banner section -->
+<!-- middle slider -->
+<section class="middle-slider container wow bounceInUp animated">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="bag-product-slider small-pr-slider cat-section">
+                <div class="slider-items-products">
+                    <div class="new_title center">
+                        <h2>مقالات گرافیک</h2>
+                    </div>
+                    <div id="bag-seller-slider" class="product-flexslider hidden-buttons">
+                        <div class="slider-items slider-width-col3">
+
+                            @foreach (var item in Model.ArtisticProducts)
+                            {
+                                <!-- Item -->
+                                <div class="item">
+                                    <div class="col-item">
+                                        @if (item.Discount != null && item.Discount == 0)
+                                        {
+                                            <div class="sale-label sale-top-right">حراج</div>
+                                        }
+                                        <div class="product-image-area">
+                                            <a class="product-image" title="@item.NamePersian" href="@Url.Action("Single","Products",new{Id = item.Id})"> <img src="@Url.Content(item.ImageUrl)" class="img-responsive" alt="a" /> </a>
+                                            <div class="actions-links">
+                                                <span class="add-to-links"> <a title="مشاهده مقاله" class="magik-btn-quickview" href="@Url.Action("Single","Products",new{Id = item.Id})"><span>مشاهده مقاله</span></a> @*<a title="Add to Wishlist" class="link-wishlist" href="http://bit.do/bromq"><span>Add to Wishlist</span></a> <a title="Add to Compare" class="link-compare" href="compare.html"><span>Add to Compare</span></a>*@</span>
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="info-inner">
+                                                <div class="item-title">
+                                                    <a title=" Sample Products" href="@Url.Action("Single","Products",new{Id = item.Id})"> @item.NamePersian </a>
+                                                </div>
+                                                <!--item-title-->
+                                                <div class="item-content">
+                                                    @*<div class="ratings">
+                                                            <div class="rating-box">
+                                                                <div class="rating"></div>
+                                                            </div>
+                                                        </div>*@
+                                                    @if (item.Discount != null && item.Discount == 0)
+                                                    {
+                                                        <div class="price-box">
+                                                            <p class="special-price">
+                                                                <span class="price"> @item.Discount تومان</span>
+                                                            </p>
+                                                            <p class="old-price">
+                                                                <span class="price-sep">-</span> <span class="price"> @item.Price تومان</span>
+                                                            </p>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="price-box">
+                                                            <span class="regular-price"> <span class="price">@item.Price تومان</span> </span>
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                                <!--item-content-->
+                                            </div>
+                                            <!--info-inner-->
+                                            @*<div class="actions">
+                                                    <button type="button" title="Add to Cart" class="button btn-cart"><span>Add to Cart</span></button>
+                                                </div>*@
+                                            <!--actions-->
+
+                                            <div class="clearfix"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Item -->
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="shoes-product-slider small-pr-slider cat-section">
+                <div class="slider-items-products">
+                    <div class="new_title center">
+                        <h2>مقالات کامپیوتر</h2>
+                    </div>
+                    <div id="shoes-slider" class="product-flexslider hidden-buttons">
+                        <div class="slider-items slider-width-col3">
+
+                            @foreach (var item in Model.EngeenierProducts)
+                            {
+                                <!-- Item -->
+                                <div class="item">
+                                    <div class="col-item">
+                                        @if (item.Discount != null && item.Discount == 0)
+                                        {
+                                            <div class="sale-label sale-top-right">حراج</div>
+                                        }
+                                        <div class="product-image-area">
+                                            <a class="product-image" title="@item.NamePersian" href="@Url.Action("Single","Products",new{Id = item.Id})"> <img src="@Url.Content(item.ImageUrl)" class="img-responsive" alt="a" /> </a>
+                                            <div class="actions-links">
+                                                <span class="add-to-links"> <a title="مشاهده مقاله" class="magik-btn-quickview" href="@Url.Action("Single","Products",new{Id = item.Id})"><span>مشاهده مقاله</span></a> @*<a title="Add to Wishlist" class="link-wishlist" href="http://bit.do/bromq"><span>Add to Wishlist</span></a> <a title="Add to Compare" class="link-compare" href="compare.html"><span>Add to Compare</span></a>*@</span>
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="info-inner">
+                                                <div class="item-title">
+                                                    <a title=" Sample Products" href="@Url.Action("Single","Products",new{Id = item.Id})"> @item.NamePersian </a>
+                                                </div>
+                                                <!--item-title-->
+                                                <div class="item-content">
+                                                    @*<div class="ratings">
+                                                            <div class="rating-box">
+                                                                <div class="rating"></div>
+                                                            </div>
+                                                        </div>*@
+                                                    @if (item.Discount != null && item.Discount == 0)
+                                                    {
+                                                        <div class="price-box">
+                                                            <p class="special-price">
+                                                                <span class="price"> @item.Discount تومان</span>
+                                                            </p>
+                                                            <p class="old-price">
+                                                                <span class="price-sep">-</span> <span class="price"> @item.Price تومان</span>
+                                                            </p>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="price-box">
+                                                            <span class="regular-price"> <span class="price">@item.Price تومان</span> </span>
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                                <!--item-content-->
+                                            </div>
+                                            <!--info-inner-->
+                                            @*<div class="actions">
+                                                    <button type="button" title="Add to Cart" class="button btn-cart"><span>Add to Cart</span></button>
+                                                </div>*@
+                                            <!--actions-->
+
+                                            <div class="clearfix"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Item -->
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End middle slider -->
+@section main{
+    <script type="text/javascript" src="~/assets/js/revslider.js"></script>
+
+    <script type='text/javascript'>
+        jQuery(document).ready(function () {
+            jQuery('#rev_slider_4').show().revolution({
+                dottedOverlay: 'none',
+                delay: 5000,
+                startwidth: 770,
+                startheight: 460,
+
+                hideThumbs: 200,
+                thumbWidth: 200,
+                thumbHeight: 50,
+                thumbAmount: 2,
+
+                navigationType: 'thumb',
+                navigationArrows: 'solo',
+                navigationStyle: 'round',
+
+                touchenabled: 'on',
+                onHoverStop: 'on',
+
+                swipe_velocity: 0.7,
+                swipe_min_touches: 1,
+                swipe_max_touches: 1,
+                drag_block_vertical: false,
+
+                spinner: 'spinner0',
+                keyboardNavigation: 'off',
+
+                navigationHAlign: 'center',
+                navigationVAlign: 'bottom',
+                navigationHOffset: 0,
+                navigationVOffset: 20,
+
+                soloArrowLeftHalign: 'left',
+                soloArrowLeftValign: 'center',
+                soloArrowLeftHOffset: 20,
+                soloArrowLeftVOffset: 0,
+
+                soloArrowRightHalign: 'right',
+                soloArrowRightValign: 'center',
+                soloArrowRightHOffset: 20,
+                soloArrowRightVOffset: 0,
+
+                shadow: 0,
+                fullWidth: 'on',
+                fullScreen: 'off',
+
+                stopLoop: 'off',
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+
+                shuffle: 'off',
+
+                autoHeight: 'off',
+                forceFullWidth: 'on',
+                fullScreenAlignForce: 'off',
+                minFullScreenHeight: 0,
+                hideNavDelayOnMobile: 1500,
+
+                hideThumbsOnMobile: 'off',
+                hideBulletsOnMobile: 'off',
+                hideArrowsOnMobile: 'off',
+                hideThumbsUnderResolution: 0,
+
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                startWithSlide: 0,
+                fullScreenOffsetContainer: ''
+            });
+        });
+    </script>
+}

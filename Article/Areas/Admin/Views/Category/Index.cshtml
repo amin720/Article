@@ -1,0 +1,223 @@
+﻿@model IEnumerable<Article.Core.Entities.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+
+    var counter = 1;
+
+}
+
+<!-- Section First -->
+<div class="row" dir="rtl">
+    <!-- Input Tags-->
+    <div class=" block col-sm-3" style="margin-left: 35px; margin-right: 25px; min-height: 50%;">
+        <!-- Input States Title -->
+        <div class="block-title">
+            <h2>وارد کردن دسته بندی</h2>
+        </div>
+        <!-- END Input States Title -->
+        <!-- Input States Content -->
+        @*<form class="form-horizontal form-bordered" id="frmCreator">*@
+        @*        @using (Ajax.BeginForm(Url.Action("Create", "PostCategory"), new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "tableElm"}))*@
+        @using (Html.BeginForm("Create", "Category", FormMethod.Post, new { @class = "form-horizontal form-bordered", @id = "CreateForm" }))
+        {
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="Name">نام</label>
+                <div class="col-md-7">
+                    <input type="text" id="Name" name="Name" class="form-control" placeholder="...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="Slug">نامک</label>
+                <div class="col-md-7">
+                    <input type="text" id="Slug" name="Slug" class="form-control" placeholder="..." disabled="disabled">
+                </div>
+            </div>
+            <!-- Select2 plugin (class is initialized in js/app.js -> uiInit()), for extra usage examples you can check out http://ivaynberg.github.io/select2/ -->
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="ParentId">والد</label>
+                <div class="col-md-7">
+                    <select id="ParentId" name="ParentId" class="select-select2" style="width: 100%;" data-placeholder="یک انتخاب..">
+                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                        <option value="@string.Empty">بدون والد</option>
+                        @foreach (var parent in Model)
+                        {
+                            <option value="@parent.Id">@parent.Name</option>
+}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group form-actions">
+                <div class="col-md-9 col-md-offset-3">
+                    <button type="submit" id="createBtn" class="btn btn-effect-ripple btn-primary">ثبت</button>
+                </div>
+            </div>
+
+        }
+        @*</form>*@
+
+        <!-- END Input States Content -->
+    </div>
+    <!-- END Input Tags-->
+    <!-- Datatables Block -->
+    <!-- Datatables is initialized in js/pages/uiTables.js -->
+    <div class="block full col-sm-8">
+        <div class="block-title">
+            <h2>دسته بندی ها</h2>
+        </div>
+        <div class="table-responsive" dir="ltr" id="tableElm">
+            <table id="example-datatable" class="table table-striped table-bordered table-vcenter">
+                <thead>
+                    <tr class="text-center">
+                        <th style="width: 50px;">شماره</th>
+                        <th>نام</th>
+                        <th>نامک</th>
+                        <th style="width: 120px;">مادر</th>
+                        <th class="text-center" style="width: 75px;"><i class="fa fa-flash"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var child in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@counter</td>
+                            <td id="Name"><strong>@child.Name</strong></td>
+                            <td id="Id">@child.Id</td>
+                            @if (child.ParentId != null)
+                            {
+                                var parents = Model.Single(p => p.Id == child.ParentId);
+                                <td>@parents.Name</td>
+}
+                            else
+                            {
+                                <td></td>
+}
+                            <td class="text-center">
+                                <a href="@Url.Action("Edit", "Category", new { categoryId = child.Id})" data-toggle="tooltip" title="Edit User" class="btn btn-effect-ripple btn-xs btn-success"><i class="fa fa-pencil"></i></a>
+                                <a href="@Url.Action("Delete", "Category", new { categoryId = child.Id})" id="btnDelete" data-toggle="tooltip" title="Delete User" class="btn btn-effect-ripple btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>counter++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div id="testT"></div>
+    </div>
+    <!-- END Datatables Block -->
+</div>
+<!-- END Section First -->
+@section Category{
+
+    @*<script>
+
+            $(document).ready(function () {
+
+                $("button#createBtn").click(function () {
+
+                    var model = {
+                        //        Id: $("#createSlug").val(),
+                        Name: $("#Name").val(),
+                        ParentCategoryId: $("#ParentCategoryId").val()
+                    };
+
+                    var varData = $("#frmCreator").serialize();
+
+                    $.ajax({
+                        type: "POST",
+
+                        dataType: "json",
+
+                        data: varData,
+
+                        url: "@Url.Action("Create","PostCategory")",
+
+                        success: function (response) {
+                            $("#testT").html(response.Message);
+                        },
+                        failure: function (response) {
+                            $("#testT").html(response.responseText);
+                        },
+                        error: function (response) {
+                            $("#testT").html("Error on sending or receiving data!");
+                        }
+                    });
+                });
+            });
+        </script>*@
+
+    @*<script>
+
+            $(document).ready(function () {
+
+                $("a#btnDelete").click(function () {
+
+                    var model = {
+                                    Id: $("td#Id").val(),
+                                    Name: $("td#Name").val(),
+                                    ParentCategoryId: $("td#ParentCategoryId").val()
+                                }
+
+                    $.ajax({
+
+                        type: "POST",
+
+                        dataType: "html",
+
+                        data: model,
+
+                        url: "@Url.Action("Delete","PostCategory")",
+
+                        error: function (response) {
+
+                            $("div#testT").html("Error on sending or receiving data!");
+
+                        },
+
+                        success: function (response) {
+
+                            $("form#frmMain").html(response);
+
+                            // **************************************************
+                            // بسيار بسيار مهم
+                            $.validator.unobtrusive.parse("form#frmMain");
+                            // **************************************************
+
+                            $("h4#generalDialogLabel").html("Delete Category");
+
+                            $("div#generalDialog").modal("toggle");
+
+                        },
+
+                        complete: function (response) {
+
+
+
+                        },
+
+                    });
+
+                });
+
+            });
+
+        </script>*@
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/Areas/Admin/Scripts/js/pages/uiTables.js"></script>
+    <script>
+        $(function () {
+            UiTables.init();
+        });
+    </script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/Areas/Admin/Scripts/js/pages/formsComponents.js"></script>
+    <script>
+        $(function () {
+            FormsComponents.init();
+        });
+    </script>
+}
+

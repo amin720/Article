@@ -1,0 +1,117 @@
+﻿@model Article.Areas.Admin.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+
+    var date = DateTime.Now;
+}
+
+<div class="col-md-4">
+    <a href="@Url.Action("Delete", "User", routeValues: new {username = Model.UserName})" id="deleteUsername" class="btn btn-block btn-lg btn-danger" style="margin: 5px;">پاک کردن این کاربر</a>
+</div>
+
+<div class="row" dir="rtl">
+    @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal form-bordered" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Section First -->
+
+        <div class="col-sm-8">
+            <!-- Input Name -->
+            <div class="block">
+                <!-- Name Input Title -->
+                <div class="block-title">
+                    <h2>مشخصات کاربر</h2>
+                </div>
+                <!-- END Name Input Title -->
+                <div class="form-group">
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-user"></i></span>
+                        <input type="text" id="UserName" name="UserName" class="form-control" placeholder="نام کاربری (الزامی)" value="@Model.UserName" disabled="disabled">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <br>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-parents"></i></span>
+                        <input type="text" id="DisplayName" name="DisplayName" class="form-control" placeholder="نام و نام خانوادگی" value="@Model.DisplayName">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <br>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                        <input type="email" id="Email" name="Email" class="form-control" placeholder="ایمیل(الزامی)" value="@Model.Email">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <br>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-lock"></i></span>
+                        <input type="password" id="CurrentPassword" name="CurrentPassword" class="form-control" placeholder="کلمه عبور(الزامی)" value="@Model.CurrentPassword">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <br>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-lock"></i></span>
+                        <input type="password" id="NewPassword" name="NewPassword" class="form-control" placeholder="تکرار کلمه عبور(الزامی)" value="">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <hr>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-parents"></i></span>
+                        <input type="text" id="ConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="تکرار کلمه عبور(الزامی)" value="">
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+            </div>
+            <!-- END Input Name -->
+
+        </div>
+        <div class="col-sm-4">
+            <!-- Stablished -->
+            <div class="block">
+                <!-- Stablished Input Title -->
+                <div class="block-title">
+                    <h2>انتشار</h2>
+                </div>
+                <!-- END Stablished Input Title -->
+                <div class="form-group row">
+                    <div class="col-xs-7">تاریخ: @date</div>
+                    <div class="col-xs-5">
+                        <button type="submit" class="btn btn-effect-ripple btn-primary btn-lg">ثبت</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- END Stablished -->
+            <!-- Feature Image Input Block -->
+            <div class="block">
+                <!-- Feature Image Input Title -->
+                <div class="block-title">
+                    <h2>انتخاب عکس ویژه</h2>
+                </div>
+                <!-- END Feature Image Input Title -->
+                <!-- Feature Image Input Content -->
+                <!-- Dropzone.js, You can check out https://github.com/enyo/dropzone/wiki for usage examples -->
+                <form action="page_forms_components.html" class="dropzone"></form>
+                <!-- END Feature Image Input Content -->
+            </div>
+            <!-- END Feature Image Input Block -->
+
+
+        </div>
+
+    }
+</div>
+<!-- END Section First -->
+@section User
+{
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/Areas/Admin/Scripts/js/pages/formsComponents.js"></script>
+    <script>
+        $(function () {
+            FormsComponents.init();
+        });
+    </script>
+    
+}

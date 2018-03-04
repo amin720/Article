@@ -1,0 +1,56 @@
+﻿@model Article.Areas.Admin.ViewModels.CategoryViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+}
+
+
+
+<h2>Edit <strong>@Model.Name</strong></h2>
+
+@using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { @class = "form-horizontal form-bordered" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Hidden("cat", Model.Id)
+
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="Name">نام</label>
+            <div class="col-md-9">
+                <input type="text" id="Name" name="Name" class="form-control" placeholder="..." value="@Model.Name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="ParentId">والد</label>
+            <div class="col-md-9">
+                <select id="ParentId" name="ParentId" class="select-select2" style="width: 100%;" data-placeholder="یک انتخاب..">
+                    <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                    <option value="@string.Empty">بدون والد</option>
+
+                    @foreach (var parent in Model.Categories)
+                    {
+                        <option value="@parent.Id">@parent.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ذخیره" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

@@ -1,0 +1,126 @@
+﻿@model Article.Areas.Admin.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+
+    var date = DateTime.Now;
+}
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "form-horizontal form-bordered" }))
+{
+    @Html.AntiForgeryToken()
+    <!-- Section First -->
+    <div class="row" dir="rtl">
+        <div class="col-sm-8">
+            <!-- Input Name -->
+            <div class="block">
+                <!-- Name Input Title -->
+                <div class="block-title">
+                    <h2>مشخصات کاربر</h2>
+                </div>
+                <!-- END Name Input Title -->
+                <div class="form-group">
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-user"></i></span>
+                        <input type="text" id="UserName" name="UserName" class="form-control" placeholder="نام کاربری (الزامی)">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <br>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                        <input type="email" id="Email" name="Email" class="form-control" placeholder="ایمیل(الزامی)">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <br>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-lock"></i></span>
+                        <input type="password" id="NewPassword" name="NewPassword" class="form-control" placeholder="کلمه عبور(الزامی)">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <br>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-lock"></i></span>
+                        <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="تکرار کلمه عبور(الزامی)">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <hr>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-parents"></i></span>
+                        <input type="text" id="DisplayName" name="DisplayName" class="form-control" placeholder="نام و نام خانوادگی">
+                    </div>
+                    <div class="col-md-2"></div>
+                    @*<br>
+                        <div class="input-group col-md-8 col-md-offset-2">
+                            <span class="input-group-addon"><i class="gi gi-parents"></i></span>
+                            <input type="text" id="example-input1-group1" name="example-input1-group1" class="form-control" placeholder="نام خانوادگی">
+                        </div>
+                        <div class="col-md-2"></div>*@
+                    <hr>
+                    <div class="input-group col-md-8 col-md-offset-2">
+                        <span class="input-group-addon"><i class="gi gi-tie"></i></span>
+                        <select id="SelectedRole" name="SelectedRole" class="select-select2" style="width: 100%;" data-placeholder="نقش">
+                            <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                            @foreach (var role in Model.Roles)
+                            {
+                                <option value="@role.Text">@role.Text</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="col-md-2"></div>
+                    <hr>
+
+                </div>
+
+            </div>
+            <!-- END Input Name -->
+
+        </div>
+        <div class="col-sm-4">
+            <!-- Stablished -->
+            <div class="block">
+                <!-- Stablished Input Title -->
+                <div class="block-title">
+                    <h2>انتشار</h2>
+                </div>
+                <!-- END Stablished Input Title -->
+                <div class="form-group row">
+                    <div class="col-xs-7">تاریخ: @date</div>
+                    <div class="col-xs-5">
+                        <button type="submit" class="btn btn-effect-ripple btn-primary btn-lg">ثبت</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- END Stablished -->
+            <!-- Feature Image Input Block -->
+            <div class="block">
+                <!-- Feature Image Input Title -->
+                <div class="block-title">
+                    <h2>انتخاب عکس ویژه</h2>
+                </div>
+                <!-- END Feature Image Input Title -->
+                <!-- Feature Image Input Content -->
+                <!-- Dropzone.js, You can check out https://github.com/enyo/dropzone/wiki for usage examples -->
+                <form action="page_forms_components.html" class="dropzone"></form>
+                <!-- END Feature Image Input Content -->
+            </div>
+            <!-- END Feature Image Input Block -->
+
+
+        </div>
+    </div>
+    <!-- END Section First -->
+}
+@section User
+{
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/Areas/Admin/Scripts/js/pages/formsComponents.js"></script>
+    <script>
+        $(function () {
+            FormsComponents.init();
+        });
+    </script>
+
+}

@@ -1,0 +1,10 @@
+﻿@model Article.Areas.Admin.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Product/_ProductLayout.cshtml";
+}
+
+<h2>ویرایش</h2>
+
+@Html.Partial("_productForm", Model)
