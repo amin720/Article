@@ -44,7 +44,7 @@ namespace Article.Infrastructure.Repository
 			{
 				return await db.Categories
 										.Where(cat => cat.CategoryType == "product")
-										.Include(cat => cat.Category1)
+										.Include(c => c.Category1)
 										.ToListAsync();
 			}
 		}

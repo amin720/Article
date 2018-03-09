@@ -211,10 +211,6 @@
                 <div class="form-group">
                     <div class="col-md-10" style="text-align: left;">
 
-                        @{
-                            var tempCat = Model.CategoryId;
-                        }
-
                         @BuildMenu(Model.Categories)
 
                         @helper BuildMenu(IEnumerable<Category> data, int? parentId = null)
@@ -245,7 +241,7 @@
                                         @BuildMenu(data, item.Id);
                                     }
                                 }
-                }
+}
                     </div>
                     <label class="col-md-3 control-label"></label>
                 </div>

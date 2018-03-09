@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Article.Core.Interfaces;
 using Article.Infrastructure.Repository;
@@ -64,11 +65,65 @@ namespace Article.Controllers
 			return View();
 		}
 
-		// GET: Grid
-		[Route("Grid")]
-		public ActionResult Grid()
+		// GET: Shop
+		//[Route("Shop")]
+		public async Task<ActionResult> Shop(int? pageSize, string categoryName, int? pageNumber = 1)
 		{
-			return View();
+			pageSize = 9;
+
+			pageNumber = pageNumber == null || pageNumber == 1 ? 1 : pageNumber;
+
+			IEnumerable<Product> bestProducts = new List<Product>();
+			if (string.IsNullOrEmpty(categoryName))
+			{
+				bestProducts = await _product.GetPageAsync((int)pageNumber, (int)pageSize);
+			}
+			else
+			{
+				bestProducts = await _product.GetPageByCategoryAsync((int)pageNumber, (int)pageSize, categoryName);
+			}
+
+			var model = new ProductsManagerViewModel
+			{
+				Categories = await _category.GetAllAsync(),
+				BestSeller = bestProducts.Shuffle(),
+			};
+
+			var products = string.IsNullOrEmpty(categoryName) ? await _product.GetAllAsync(): await _product.GetAllByCategoryAsync(categoryName);
+
+			ViewBag.CountTotalPages = CalucutePageNumbers((int)pageSize, products.Count());
+
+			return View(model);
 		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> Search(string search)
+		{
+			var products = await _product.GetAllAsync();
+			var searchItems = products.Where(p => p.NamePersian.Contains(search));
+
+			return View(searchItems);
+		}
+
+		#region Method
+
+		private int CalucutePageNumbers(int pageSize, int totalItems)
+		{
+			int totalPage = 0;
+
+			if (totalItems % pageSize == 0)
+			{
+				totalPage = totalItems / pageSize;
+			}
+			else
+			{
+				totalPage = (int)(totalItems / pageSize) + 1;
+			}
+
+			return totalPage;
+		}
+
+		#endregion
 	}
 }

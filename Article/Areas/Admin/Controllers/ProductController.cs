@@ -64,7 +64,6 @@ namespace Article.Areas.Admin.Controllers
 
 
 			return View(model: model, viewName: "Create");
-
 		}
 
 

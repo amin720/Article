@@ -841,6 +841,8 @@
     <Content Include="Views\Products\Single.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Products\Buy.cshtml" />
+    <Content Include="Views\Home\Shop.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

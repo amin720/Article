@@ -73,3 +73,17 @@ a.text-black:focus {
     #nav > li > a {
         padding: 13px 35px;
     }
+
+@media (min-width: 768px) {
+    .col-sm-push-3 {
+        right: 25% !important;
+    }
+}
+.cat-img-title.cat-bg .cat-heading, .cat-img-title.cat-bg p {
+    color: black;
+    float: right;
+    direction: rtl;
+}
+#search {
+    width: 88%;
+}

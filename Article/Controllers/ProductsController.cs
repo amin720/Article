@@ -72,7 +72,7 @@ namespace Article.Controllers
 
 		}
 
-		// GET: Single
+		// GET: Buy
 		[Route("/Buy/{id}")]
 		public async Task<ActionResult> Buy(int Id)
 		{
@@ -85,5 +85,7 @@ namespace Article.Controllers
 
 			return View(model: model);
 		}
+
+		
 	}
 }

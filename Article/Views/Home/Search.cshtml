@@ -1,0 +1,113 @@
+﻿@using Article.Core.Entities
+@model IEnumerable<Product>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Two columns content -->
+<div class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <section class="col-main col-sm-9 col-sm-push-3 wow bounceInUp animated">
+                <div class="category-description std">
+                    <div class="slider-items-products">
+                        <div id="category-desc-slider" class="product-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col1">
+
+                                <!-- Item -->
+                                <div class="item">
+                                    <a href="#"><img alt="" src="~/assets/images/article-3.jpg" width="900" height="444"></a>
+                                    <div class="cat-img-title cat-bg cat-box">
+                                        <h2 class="cat-heading">نمایش مقالات جستجو شده</h2>
+                                    </div>
+                                </div>
+                                <!-- End Item -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="category-title">
+                    <h1 class="pull-right">محصولات</h1>
+                </div>
+                <div class="category-products">
+                    <div class="toolbar">
+                        <div class="pager pull-left">
+
+                            <div class="pages">
+                                <label>صفحه:</label>
+                                <ul class="pagination">
+                                    @*<li><a href="#">&laquo;</a></li>*@
+                                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Shop"? "active":"")"><a href="@Url.Action("Shop","Home",new{pageNumber = 1})">1</a></li>
+                                    @for (int i = 2; i <= ViewBag.CountTotalPages; i++)
+                                    {
+                                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "/Shop?pageNumber="+i ? "active":"")"><a href="@Url.Action("Shop","Home",new{pageNumber = i})">@i</a></li>
+                                    }
+
+                                    @*<li><a href="#">&raquo;</a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="products-grid">
+                        @foreach (var item in Model)
+                        {
+                            <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <div class="col-item">
+                                    @if (item.Discount != null)
+                                    {
+                                        <div class="sale-label sale-top-right">حراج</div>
+                                    }
+                                    <div class="product-image-area">
+                                        <a class="product-image" title="@item.NamePersian" href="@Url.Action("Single","Products",new{Id = item.Id})"> <img src="@Url.Content(item.ImageUrl)" class="img-responsive" alt="@item.NamePersian" /> </a>
+                                        <div class="hover_fly">
+                                            <a class="quick-view" href="@Url.Action("Single","Products",new{Id = item.Id})">
+                                                <div>
+                                                    <i class="icon-eye-open"></i><span>مشاهده مقاله</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="info-inner">
+                                            <div class="item-title">
+                                                <a title="@item.NamePersian" href="@Url.Action("Single","Products",new{Id = item.Id})"> @item.NamePersian </a>
+                                            </div>
+                                            <!--item-title-->
+                                            <div class="item-content">
+                                                <div class="price-box">
+                                                    @if (item.Discount != null)
+                                                    {
+                                                        <p class="special-price">
+                                                            <span class="price"> @item.Discount تومان </span>
+                                                        </p>
+                                                        <p class="old-price">
+                                                            <span class="price-sep">-</span> <span class="price"> @item.Price تومان </span>
+                                                        </p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="special-price">
+                                                            <span class="price"> @item.Price تومان </span>
+                                                        </p>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <!--item-content-->
+                                        </div>
+                                        <!--info-inner-->
+
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!-- End Two columns content -->

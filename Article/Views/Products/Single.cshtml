@@ -380,8 +380,12 @@
                                                             }
                                                             <div class="product-image-area">
                                                                 <a class="product-image" title="@item.NamePersian" href="@Url.Action("Single","Products",new{Id = item.Id})"> <img src="@Url.Content(item.ImageUrl)" class="img-responsive" alt="a" /> </a>
-                                                                <div class="actions-links">
-                                                                    <span class="add-to-links"> <a title="magik-btn-quickview" class="magik-btn-quickview" href="@Url.Action("Single","Products",new{Id = item.Id})"><span>مشاهده مقاله</span></a> @*<a title="Add to Wishlist" class="link-wishlist" href="http://bit.do/bromq"><span>Add to Wishlist</span></a> <a title="Add to Compare" class="link-compare" href="compare.html"><span>Add to Compare</span></a>*@</span>
+                                                                <div class="hover_fly">
+                                                                    <a class="quick-view" href="@Url.Action("Single","Products",new{Id = item.Id})">
+                                                                        <div>
+                                                                            <i class="icon-eye-open"></i><span>مشاهده مقاله</span>
+                                                                        </div>
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                             <div class="info">

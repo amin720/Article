@@ -30,7 +30,7 @@ namespace Article.Infrastructure.Repository
 		{
 			using (var db = new ArticleEntities())
 			{
-				var product = await db.Products.Include(cat => cat.Category.Name == category)
+				var product = await db.Products.Where(cat => cat.Category.Name == category)
 											   .ToListAsync();
 
 				if (product == null)
