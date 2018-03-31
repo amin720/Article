@@ -8,6 +8,7 @@ namespace Article.Areas.Admin.ViewModels
 		public string Name { get; set; }
 		public int Id { get; set; }
 		public int ParentId { get; set; }
+		public string CategoryType { get; set; }
 		public IEnumerable<Category> Categories { get; set; }
 	}
 }

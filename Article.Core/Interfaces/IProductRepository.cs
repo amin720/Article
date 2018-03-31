@@ -13,6 +13,7 @@ namespace Article.Core.Interfaces
 		Task EditAsync(int id, Product updateItem);
 		Task DeleteAsync(int id);
 		Task<IEnumerable<Product>> GetPageAsync(int pageNumber, int pageSize);
+		Task<IEnumerable<Product>> GetPageByCategoryTypeAsync(int pageNumber, int pageSize, string categoryType);
 		Task<IEnumerable<Product>> GetPageByCategoryAsync(int pageNumber, int pageSize, string category);
 		Task<IEnumerable<Product>> GetPageByCategoryAsync(int pageNumber, int pageSize, int categoryId);
 		Task<IEnumerable<Product>> GetProductsByAuthorAsync(string authorId);

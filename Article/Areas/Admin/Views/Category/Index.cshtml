@@ -44,10 +44,26 @@
                         @foreach (var parent in Model)
                         {
                             <option value="@parent.Id">@parent.Name</option>
-}
+                        }
                     </select>
                 </div>
             </div>
+
+            <div class="form-group row">
+
+                <div class="form-group">
+                    <label class="col-md-6 control-label" for="CategoryType">انتخاب نوع دسته بندی</label>
+                    <div class="col-md-6">
+                        <select id="CategoryType" name="CategoryType" class="select-select2" style="width: 100%;" data-placeholder="یک انتخاب..">
+                            <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                            <option value="">بدون انتخاب</option>
+                            <option value="article">مقاله</option>
+                            <option value="book">کتاب</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group form-actions">
                 <div class="col-md-9 col-md-offset-3">
                     <button type="submit" id="createBtn" class="btn btn-effect-ripple btn-primary">ثبت</button>
@@ -72,7 +88,7 @@
                     <tr class="text-center">
                         <th style="width: 50px;">شماره</th>
                         <th>نام</th>
-                        <th>نامک</th>
+                        <th>نوع دسته بندی</th>
                         <th style="width: 120px;">مادر</th>
                         <th class="text-center" style="width: 75px;"><i class="fa fa-flash"></i></th>
                     </tr>
@@ -82,12 +98,25 @@
                     {
                         <tr>
                             <td class="text-center">@counter</td>
-                            <td id="Name"><strong>@child.Name</strong></td>
-                            <td id="Id">@child.Id</td>
+                            <td id="Name" class="text-center"><strong>@child.Name</strong></td>
+                            
+                                @if (child.CategoryType == "article")
+                                {
+                                  <td id="CategoryType" class="text-center"> مقاله </td>
+                                }
+                                else if (child.CategoryType == "book")
+                                {
+                                    <td id="CategoryType" class="text-center"> کتاب </td>
+                                }
+                                else
+                                {
+                                    <td id="CategoryType" class="text-center">  </td>
+                                }
+                           
                             @if (child.ParentId != null)
                             {
                                 var parents = Model.Single(p => p.Id == child.ParentId);
-                                <td>@parents.Name</td>
+                                <td class="text-center">@parents.Name</td>
 }
                             else
                             {

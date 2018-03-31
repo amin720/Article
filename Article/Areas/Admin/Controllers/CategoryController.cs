@@ -111,6 +111,7 @@ namespace Article.Areas.Admin.Controllers
 				{
 					Id = category.Id,
 					Name = category.Name,
+					CategoryType = category.CategoryType,
 					ParentId = (int)category.ParentId,
 					Categories = await _repository.GetAllAsync()
 				};
@@ -148,6 +149,7 @@ namespace Article.Areas.Admin.Controllers
 				{
 					Id = newCat.Id,
 					Name = newCat.Name,
+					CategoryType = newCat.CategoryType,
 					ParentId = newCat.ParentId
 				};
 

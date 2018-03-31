@@ -35,13 +35,17 @@ namespace Article.Areas.Admin.Controllers
 		public async Task<ActionResult> Index()
 	    {
 		    var users = await _userRepository.GetAllUsersAsync();
+		    var categories = await _categoryRepostitory.GetAllAsync();
+		    int articleCount = categories.Count(c => c.CategoryType == "article");
+		    int bookCount = categories.Count(c => c.CategoryType == "book");
+
 			var model = new DashboardViewModel()
 			{
 				UserLogin = User.Identity.Name,
 				Users = users.Select(u => u.Roles.Where(r => r.RoleId == "54ec7407-2468-4579-82d9-99e701f5c761")).Count(),
 				Price = 0,
-				Domain = 0,
-				Host = 0,
+				Article = articleCount,
+				Books = bookCount,
 				Categories = await _categoryRepostitory.GetAllAsync()
 
 			};
@@ -182,7 +186,7 @@ namespace Article.Areas.Admin.Controllers
 		    {
 			    items.Add(new AdminMenuItem
 			    {
-				    Text = "Admin Home",
+				    Text = "داشبرد",
 				    Action = "index",
 				    RouteInfo = new { controller = "admin", area = "admin" }
 			    });
@@ -191,14 +195,14 @@ namespace Article.Areas.Admin.Controllers
 			    {
 				    items.Add(new AdminMenuItem
 				    {
-					    Text = "Users",
+					    Text = "کاربران",
 					    Action = "index",
 					    RouteInfo = new { controller = "user", area = "admin" }
 				    });
 
 					items.Add(new AdminMenuItem()
 					{
-						Text = "Products",
+						Text = "محصولات",
 						Action = "index",
 						RouteInfo = new { controller = "product", area = "admin" }
 					});
@@ -207,34 +211,34 @@ namespace Article.Areas.Admin.Controllers
 			    {
 				    items.Add(new AdminMenuItem
 				    {
-					    Text = "Profile",
+					    Text = "تنظیمات پروفایل",
 					    Action = "edit",
 					    RouteInfo = new { controller = "user", area = "admin", username = User.Identity.Name }
 				    });
 			    }
 
-			    if (!User.IsInRole("author"))
-			    {
-				    items.Add(new AdminMenuItem
-				    {
-					    Text = "Tags",
-					    Action = "index",
-					    RouteInfo = new { controller = "tag", area = "admin" }
-				    });
-			    }
+			    //if (!User.IsInRole("author"))
+			    //{
+				   // items.Add(new AdminMenuItem
+				   // {
+					  //  Text = "Tags",
+					  //  Action = "index",
+					  //  RouteInfo = new { controller = "tag", area = "admin" }
+				   // });
+			    //}
+
+			    //items.Add(new AdminMenuItem
+			    //{
+				   // Text = "Posts",
+				   // Action = "index",
+				   // RouteInfo = new { controller = "product", area = "admin" }
+			    //});
 
 			    items.Add(new AdminMenuItem
 			    {
-				    Text = "Posts",
+				    Text = "دسته بندی محصولات",
 				    Action = "index",
-				    RouteInfo = new { controller = "product", area = "admin" }
-			    });
-
-			    items.Add(new AdminMenuItem
-			    {
-				    Text = "Categories",
-				    Action = "index",
-				    RouteInfo = new { controller = "postcategory", area = "admin" }
+				    RouteInfo = new { controller = "category", area = "admin" }
 			    });
 		    }
 
@@ -251,12 +255,12 @@ namespace Article.Areas.Admin.Controllers
 
 		    if (User.Identity.IsAuthenticated)
 		    {
-			    item.Text = "Logout";
+			    item.Text = "خروج";
 			    item.Action = "logout";
 		    }
 		    else
 		    {
-			    item.Text = "Login";
+			    item.Text = "وارد شدن";
 			    item.Action = "login";
 		    }
 

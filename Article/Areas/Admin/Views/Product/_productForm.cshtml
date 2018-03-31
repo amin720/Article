@@ -216,6 +216,7 @@
                         @helper BuildMenu(IEnumerable<Category> data, int? parentId = null)
                             {
                                 var items = data.Where(cat => cat.ParentId == parentId).OrderBy(cat => cat.Name);
+                                var parent = parentId;
                                 if (items.Any())
                                 {
 
@@ -224,24 +225,43 @@
                                     {
 
                                         //Model.CategoryId = item.Id;
+                                        if (item.ParentId != null)
+                                        {
+                                            <div class="checkbox" style="margin-left: 20px;">
+                                                <label for="CategoryId" style="margin-left: 10px;">
+                                                    @item.Name
+                                                </label>
+                                                @if (Model.CategoryId == item.Id)
+                                                {
+                                                    <input type="checkbox" id="CategoryId" name="CategoryId" value="@item.Id" checked>
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" id="CategoryId" name="CategoryId" value="@item.Id">
+                                                }
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="checkbox">
+                                                <label for="CategoryId" style="margin-left: 10px;">
+                                                    @item.Name
+                                                </label>
+                                                @if (Model.CategoryId == item.Id)
+                                                {
+                                                    <input type="checkbox" id="CategoryId" name="CategoryId" value="@item.Id" checked>
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" id="CategoryId" name="CategoryId" value="@item.Id">
+                                                }
+                                            </div>
+                                        }
 
-                                        <div class="checkbox">
-                                            <label for="CategoryId" style="margin-left: 10px;">
-                                                @item.Name
-                                            </label>
-                                            @if (Model.CategoryId == item.Id)
-                                            {
-                                                <input type="checkbox" id="CategoryId" name="CategoryId" value="@item.Id" checked>
-                                            }
-                                            else
-                                            {
-                                                <input type="checkbox" id="CategoryId" name="CategoryId" value="@item.Id">
-                                            }
-                                        </div>
                                         @BuildMenu(data, item.Id);
                                     }
                                 }
-}
+                }
                     </div>
                     <label class="col-md-3 control-label"></label>
                 </div>
@@ -275,6 +295,8 @@
                     <!-- END Tags Input Content -->
                 </div>*@
             <!-- END Tags Input Block -->
+
+           
             <!-- Feature Image Input Block -->
             <div class="block">
                 <!-- Feature Image Input Title -->
@@ -285,6 +307,18 @@
                     @* <img id="user_img" height="100" width="90" style="border:solid" alt="" />*@
 
                     <input type="file" title="فایل اصلی" id="file" name="file" @*onchange="show(this)"*@ />
+                </div>
+            </div>
+            
+            <div class="block">
+                <!-- Feature Image Input Title -->
+                <div class="block-title">
+                    <h2>انتخاب فایل اصلی</h2>
+                </div>
+                <div>
+                     <img id="user_img" height="300px" width="200px" style="border:solid" alt="" />
+
+                    <input type="file" title="فایل اصلی" id="image" name="image" onchange="show(this)" />
                 </div>
             </div>
             <!-- END Feature Image Input Block -->

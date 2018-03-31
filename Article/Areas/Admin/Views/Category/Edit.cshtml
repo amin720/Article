@@ -34,12 +34,51 @@
 
                     @foreach (var parent in Model.Categories)
                     {
-                        <option value="@parent.Id">@parent.Name</option>
+                        if (parent.Id == Model.ParentId)
+                        {
+                            <option value="@parent.Id" selected>@parent.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@parent.Id">@parent.Name</option>
+                        }
                     }
                 </select>
             </div>
         </div>
+        <div class="form-group row">
 
+            <div class="form-group">
+                <label class="col-md-6 control-label" for="CategoryType">انتخاب نوع دسته بندی</label>
+                <div class="col-md-6">
+                    <select id="CategoryType" name="CategoryType" class="select-select2" style="width: 100%;" data-placeholder="یک انتخاب..">
+                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+
+                        @if (!string.IsNullOrEmpty(Model.CategoryType))
+                        {
+                            if (Model.CategoryType == "article")
+                            {
+                                <option value="">بدون انتخاب</option>
+                                <option value="@Model.CategoryType" selected> مقاله </option>
+                                <option value="book">کتاب</option>
+                            }
+                            else if (Model.CategoryType == "book")
+                            {
+                                <option value="">بدون انتخاب</option>
+                                <option value="article">مقاله</option>
+                                <option value="@Model.CategoryType" selected> کتاب </option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="">بدون انتخاب</option>
+                            <option value="article">مقاله</option>
+                            <option value="book">کتاب</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -50,7 +89,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("بازگشت به لیست دسته بندی ها", "Index")
 </div>
 
 

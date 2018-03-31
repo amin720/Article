@@ -52,26 +52,41 @@ namespace Article.Areas.Admin.Controllers
 			return View(products);
 		}
 
-		// /admin/Product/create
+		// /admin/Product/CreateArticle
 		[HttpGet]
-		[Route("Create")]
-		public async Task<ActionResult> Create()
+		[Route("CreateArticle")]
+		public async Task<ActionResult> CreateArticle()
 		{
+			var categories = await _categoryRepostitory.GetAllAsync();
 			var model = new ProductViewModel()
 			{
-				Categories = await _categoryRepostitory.GetAllAsync(),
+				Categories = categories.Where(c => c.CategoryType == "article"),
 			};
 
 
 			return View(model: model, viewName: "Create");
 		}
 
+		// /admin/Product/CreateArticle
+		[HttpGet]
+		[Route("CreateBook")]
+		public async Task<ActionResult> CreateBook()
+		{
+			var categories = await _categoryRepostitory.GetAllAsync();
+			var model = new ProductViewModel()
+			{
+				Categories = categories.Where(c => c.CategoryType == "book"),
+			};
+
+
+			return View(model: model, viewName: "Create");
+		}
 
 		// /admin/Product/create
 		[HttpPost]
 		[Route("Create")]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Create(ProductViewModel model, HttpPostedFileBase file)
+		public async Task<ActionResult> Create(ProductViewModel model, HttpPostedFileBase file, HttpPostedFileBase image)
 		{
 			model.Categories = await _categoryRepostitory.GetAllAsync();
 			try
@@ -121,26 +136,53 @@ namespace Article.Areas.Admin.Controllers
 				product.Published = DateTime.Now;
 				product.CategoryId = category.Id;
 
-				var allowedExtensions = new[] {
+				var allowedExtensionsFiles = new[] {
 					".pdf", ".doc", ".docx"
 				};
 
-				var fileName = Path.GetFileName(file.FileName);
-				var ext = Path.GetExtension(file.FileName); //getting the extension(ex-.jpg)
-				if (allowedExtensions.Contains(ext)) //check what type of extension
-				{
-					string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extensi
-					string myfile = name + "_" + product.SKU + ext; //appending the name with id
-					// store the file inside ~/project folder(Img)E:\Project-Work\Zahra.Project\Restaurant\Restaurant.Web\assets\images\products\1.png
-					var path = Path.Combine(Server.MapPath("~/assets/files"), myfile);
-					product.FileUrl = "~/assets/files/" + myfile;
-					product.ImageUrl = "~/assets/images/pen.jpg";
+				var allowedExtensionsImages = new[] {
+					".Jpg", ".png", ".jpg", "jpeg"
+				};
 
-					file.SaveAs(path);
-				}
-				else
+				if (file != null)
 				{
-					ModelState.AddModelError(string.Empty, "لطفا یک فایل با فرمت pdf و doc و docx انتخاب کنید");
+					var fileName = Path.GetFileName(file.FileName);
+					var ext = Path.GetExtension(file.FileName); //getting the extension(ex-.jpg)
+					if (allowedExtensionsFiles.Contains(ext)) //check what type of extension
+					{
+						string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extensi
+						string myfile = name + "_" + product.SKU + ext; //appending the name with id
+						// store the file inside ~/project folder(Img)E:\Project-Work\Zahra.Project\Restaurant\Restaurant.Web\assets\images\products\1.png
+						var path = Path.Combine(Server.MapPath("~/assets/files"), myfile);
+						product.FileUrl = "~/assets/files/" + myfile;
+						product.ImageUrl = "~/assets/images/pen.jpg";
+
+						file.SaveAs(path);
+					}
+					else
+					{
+						ModelState.AddModelError(string.Empty, "لطفا یک فایل با فرمت pdf و doc و docx انتخاب کنید");
+					}
+
+				}
+				if (image != null)
+				{
+					var fileName = Path.GetFileName(image.FileName);
+					var ext = Path.GetExtension(image.FileName); //getting the extension(ex-.jpg)
+					if (allowedExtensionsImages.Contains(ext)) //check what type of extension
+					{
+						string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extensi
+						string myfile = name + "_" + product.SKU + ext; //appending the name with id
+						// store the file inside ~/project folder(Img)E:\Project-Work\Zahra.Project\Restaurant\Restaurant.Web\assets\images\products\1.png
+						var path = Path.Combine(Server.MapPath("~/assets/images"), myfile);
+						product.ImageUrl = "~/assets/images/" + myfile;
+
+						image.SaveAs(path);
+					}
+					else
+					{
+						ModelState.AddModelError(string.Empty, "لطفا یک فایل با فرمت pdf و doc و docx انتخاب کنید");
+					}
 				}
 
 				// TODO: update model in data store

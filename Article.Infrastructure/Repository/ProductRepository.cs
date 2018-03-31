@@ -117,6 +117,20 @@ namespace Article.Infrastructure.Repository
 				await db.SaveChangesAsync();
 			}
 		}
+		public async Task<IEnumerable<Product>> GetPageByCategoryTypeAsync(int pageNumber, int pageSize, string categoryType)
+		{
+			using (var db = new ArticleEntities())
+			{
+				var skip = (pageNumber - 1) * pageSize;
+
+				return await db.Products.Where(p => p.Published < DateTime.Now && p.Category.CategoryType == categoryType)
+										.Include("AspNetUser")
+										.OrderByDescending(p => p.Published)
+										.Skip(skip)
+										.Take(pageSize)
+										.ToArrayAsync();
+			}
+		}
 		public async Task<IEnumerable<Product>> GetPageByCategoryAsync(int pageNumber, int pageSize,string category)
 		{
 			using (var db = new ArticleEntities())

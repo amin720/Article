@@ -69,7 +69,7 @@
                 <div class="preloader-spinner themed-background hidden-lt-ie10"></div>
 
                 <!-- Text for IE9 -->
-                <h3 class="text-primary visible-lt-ie10"><strong>Loading..</strong></h3>
+                <h3 class="text-primary visible-lt-ie10"><strong>بارگذاری صفحه..</strong></h3>
             </div>
         </div>
         <!-- END Preloader -->
@@ -91,7 +91,7 @@
                         <!-- Sidebar Navigation -->
                         <ul class="sidebar-nav">
                             <li>
-                                <a href="index.html"><i class="gi gi-compass sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">داشبرد</span></a>
+                                <a href="@Url.Action("Index","Admin")"><i class="gi gi-compass sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">داشبرد</span></a>
                             </li>
                             <li class="sidebar-separator">
                                 <i class="fa fa-ellipsis-h"></i>
@@ -100,7 +100,10 @@
                                 <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-shopping_cart sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">محصولات</span></a>
                                 <ul>
                                     <li>
-                                        <a href="@Url.Action("Create","Product")">اضافه کردن</a>
+                                        <a href="@Url.Action("CreateArticle","Product")">اضافه کردن مقاله</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("CreateBook","Product")">اضافه کردن کتاب</a>
                                     </li>
                                     <li>
                                         <a href="@Url.Action("Index","Product")">لیست محصولات</a>
@@ -109,8 +112,8 @@
                                         <a href="@Url.Action("Index","Category")">دسته بندی</a>
                                     </li>
                                     @*<li>
-                                        <a href="Tags.html">بر چسپ</a>
-                                    </li>*@
+            <a href="Tags.html">بر چسپ</a>
+        </li>*@
                                 </ul>
                             </li>
                             <li class="sidebar-separator">
@@ -137,18 +140,6 @@
                                         <a href="@Url.Action("Create","User")">اضافه کردن</a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="sidebar-separator">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </li>
-                            <li>
-                                <a href="Ticketing.html"><i class="gi gi-inbox sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">تیکتینگ</span></a>
-                            </li>
-                            <li class="sidebar-separator">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </li>
-                            <li>
-                                <a href="Media.html"><i class="gi gi-picture sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">رسانه ها</span></a>
                             </li>
                         </ul>
                         <!-- END Sidebar Navigation -->
@@ -321,7 +312,7 @@
                         <!-- END Main Sidebar Toggle Button -->
                         <!-- Header Link -->
                         <li class="hidden-xs animation-fadeInQuick">
-                            <a href=""><strong>WELCOME</strong></a>
+                            <a href=""><strong>خوش آمدید</strong></a>
                         </li>
                         <!-- END Header Link -->
                     </ul>

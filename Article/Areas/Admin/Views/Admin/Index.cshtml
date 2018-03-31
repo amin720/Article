@@ -14,9 +14,9 @@
                     <i class="gi gi-cardio text-light-op"></i>
                 </div>
                 <h2 class="widget-heading h3">
-                    <strong><span data-toggle="counter" data-to="@Model.Host"></span></strong>
+                    <strong>+ <span data-toggle="counter" data-to="@Model.Article"></span>@Model.Article</strong>
                 </h2>
-                <span class="text-muted">هاست</span>
+                <span class="text-muted">تعداد مقالات</span>
             </div>
         </a>
     </div>
@@ -27,9 +27,9 @@
                     <i class="gi gi-briefcase text-light-op"></i>
                 </div>
                 <h2 class="widget-heading h3 text-warning">
-                    <strong>+ <span data-toggle="counter" data-to="@Model.Domain"></span></strong>
+                    <strong>+ <span data-toggle="counter" data-to="@Model.Books"></span>@Model.Books</strong>
                 </h2>
-                <span class="text-muted">دامنه</span>
+                <span class="text-muted">تعداد کتاب ها</span>
             </div>
         </a>
     </div>
@@ -40,7 +40,7 @@
                     <i class="gi gi-user text-light-op"></i>
                 </div>
                 <h2 class="widget-heading h3 text-success">
-                    <strong>+ <span data-toggle="counter" data-to="@Model.Users"></span></strong>
+                    <strong>+ <span data-toggle="counter" data-to="@Model.Users"></span>@Model.Users</strong>
                 </h2>
                 <span class="text-muted">کاربران</span>
             </div>
@@ -53,7 +53,7 @@
                     <i class="gi gi-wallet text-light-op"></i>
                 </div>
                 <h2 class="widget-heading h3 text-danger">
-                    <strong>تومان <span data-toggle="counter" data-to="@Model.Price"></span></strong>
+                    <strong>تومان <span data-toggle="counter" data-to="@Model.Price"></span>@Model.Price</strong>
                 </h2>
                 <span class="text-muted">درآمد</span>
             </div>
@@ -137,49 +137,3 @@
 </div>
 <!-- END Second Row -->
 
-<!-- Third Row -->
-<div class="row">
-    <div class="col-sm-3">
-        <!-- Project Widget -->
-        <a href="javascript:void(0)" class="widget">
-            <div class="widget-content themed-background-danger text-light-op text-center">
-                <div class="widget-icon">
-                    <i class="fa fa-database"></i>
-                </div>
-            </div>
-            <div class="widget-content text-dark text-center">
-                <strong>15</strong><br> پلن 1
-            </div>
-        </a>
-        <!-- END Project Widget -->
-    </div>
-    <div class="col-sm-3">
-        <!-- Statistics Widget -->
-        <a href="javascript:void(0)" class="widget">
-            <div class="widget-content themed-background-danger text-light-op text-center">
-                <div class="widget-icon">
-                    <i class="fa fa-database"></i>
-                </div>
-            </div>
-            <div class="widget-content text-dark text-center">
-                <strong>15</strong><br> پلن 2
-            </div>
-        </a>
-        <!-- END Statistics Widget -->
-    </div>
-    <div class="col-sm-3">
-        <!-- Story Widget -->
-        <a href="javascript:void(0)" class="widget">
-            <div class="widget-content themed-background-danger text-light-op text-center">
-                <div class="widget-icon">
-                    <i class="fa fa-database"></i>
-                </div>
-            </div>
-            <div class="widget-content text-dark text-center">
-                <strong>15</strong><br> پلن 3
-            </div>
-        </a>
-        <!-- END Story Widget -->
-    </div>
-</div>
-<!-- END Third Row -->

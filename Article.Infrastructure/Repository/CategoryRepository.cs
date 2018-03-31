@@ -14,7 +14,7 @@ namespace Article.Infrastructure.Repository
 		{
 			using (var db = new ArticleEntities())
 			{
-				var category = await db.Categories.Where(cat => cat.CategoryType == "product")
+				var category = await db.Categories/*.Where(cat => cat.CategoryType == "product")*/
 												.SingleAsync(cat => cat.Id == id);
 				if (category == null)
 				{
@@ -28,8 +28,8 @@ namespace Article.Infrastructure.Repository
 		{
 			using (var db = new ArticleEntities())
 			{
-				var category = await db.Categories.Where(cat => cat.CategoryType == "product")
-					.SingleAsync(cat => cat.Name == name);
+				var category = await db.Categories/*.Where(cat => cat.CategoryType == "product")*/
+												.SingleAsync(cat => cat.Name == name);
 				if (category == null)
 				{
 					throw new KeyNotFoundException("The category Id \"" + name + "\" does not exist.");
@@ -43,7 +43,7 @@ namespace Article.Infrastructure.Repository
 			using (var db = new ArticleEntities())
 			{
 				return await db.Categories
-										.Where(cat => cat.CategoryType == "product")
+										//.Where(cat => cat.CategoryType == "product")
 										.Include(c => c.Category1)
 										.ToListAsync();
 			}
@@ -60,7 +60,7 @@ namespace Article.Infrastructure.Repository
 					throw new ArgumentException("A category with the id of " + model.Id + " already exsits.");
 				}
 
-				model.CategoryType = "product";
+				//model.CategoryType = "product";
 
 				db.Categories.Add(model);
 				db.SaveChanges();
@@ -80,6 +80,7 @@ namespace Article.Infrastructure.Repository
 
 				category.Id = updateItem.Id;
 				category.Name = updateItem.Name;
+				category.CategoryType = updateItem.CategoryType;
 				category.ParentId = updateItem.ParentId;
 
 				db.SaveChanges();

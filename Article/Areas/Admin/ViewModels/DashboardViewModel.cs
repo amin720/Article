@@ -5,8 +5,8 @@ namespace Article.Areas.Admin.ViewModels
 {
 	public class DashboardViewModel
 	{
-		public int Host { get; set; }
-		public int Domain { get; set; }
+		public int Article { get; set; }
+		public int Books { get; set; }
 		public decimal Price { get; set; }
 		public int Users { get; set; }
 		public string UserLogin { get; set; }

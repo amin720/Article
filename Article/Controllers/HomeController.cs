@@ -37,6 +37,7 @@ namespace Article.Controllers
 		{
 			var bestProducts = await _product.GetPageAsync(1, 8);
 			var freeProducts = await _product.GetPageAsync(1, 8);
+			var bookProducts = await _product.GetPageByCategoryTypeAsync(1, 5, "book");
 			var artistProducts = await _product.GetPageByCategoryAsync(1, 5, "گرافیک");
 			var engeenierProducts = await _product.GetPageByCategoryAsync(1, 5, "کامپیوتر");
 
@@ -44,6 +45,7 @@ namespace Article.Controllers
 			{
 				BestSeller = bestProducts.Shuffle(),
 				FreeProducts = freeProducts.Where(p => p.Price == 0).Shuffle(),
+				BookProducts = bookProducts.Shuffle(),
 				ArtisticProducts = artistProducts.Shuffle(),
 				EngeenierProducts = engeenierProducts.Shuffle()
 			};
@@ -89,7 +91,7 @@ namespace Article.Controllers
 				BestSeller = bestProducts.Shuffle(),
 			};
 
-			var products = string.IsNullOrEmpty(categoryName) ? await _product.GetAllAsync(): await _product.GetAllByCategoryAsync(categoryName);
+			var products = string.IsNullOrEmpty(categoryName) ? await _product.GetAllAsync() : await _product.GetAllByCategoryAsync(categoryName);
 
 			ViewBag.CountTotalPages = CalucutePageNumbers((int)pageSize, products.Count());
 
@@ -101,9 +103,12 @@ namespace Article.Controllers
 		public async Task<ActionResult> Search(string search)
 		{
 			var products = await _product.GetAllAsync();
-			var searchItems = products.Where(p => p.NamePersian.Contains(search));
 
-			return View(searchItems);
+
+			products = products.Where(p => p.NamePersian.Contains(search));
+
+
+			return View(products);
 		}
 
 		#region Method
