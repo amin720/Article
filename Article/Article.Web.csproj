@@ -734,7 +734,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Extensions.cs" />
+    <Compile Include="Services\SearchProduct.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ProductDetailViewModel.cs" />
     <Compile Include="ViewModels\ProductsManagerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

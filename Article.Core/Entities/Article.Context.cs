@@ -31,9 +31,10 @@ namespace Article.Core.Entities
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<CartItem> CartItems { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using Article.Core.Interfaces;
 using Article.Infrastructure.Repository;
 using System.Web.Mvc;
 using Article.Core.Entities;
+using Article.Services;
 using Article.ViewModels;
 using static Article.Services.Extensions;
 
@@ -102,13 +103,9 @@ namespace Article.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Search(string search)
 		{
-			var products = await _product.GetAllAsync();
+			var model = SearchProduct.Search(search);
 
-
-			products = products.Where(p => p.NamePersian.Contains(search));
-
-
-			return View(products);
+			return View(model);
 		}
 
 		#region Method

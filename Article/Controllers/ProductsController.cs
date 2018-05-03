@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Article.Core.Entities;
 using Article.Core.Interfaces;
 using Article.Infrastructure.Repository;
+using Article.ViewModels;
 
 namespace Article.Controllers
 {
@@ -15,18 +17,20 @@ namespace Article.Controllers
 	{
 		private readonly ICategoryRepository _category;
 		private readonly IProductRepository _product;
+		private readonly ICommentRepository _comment;
 		private readonly IUserRepository _user;
 
 		public ProductsController()
-			: this(new CategoryRepository(), new ProductRepository(), new UserRepository())
+			: this(new CategoryRepository(), new ProductRepository(), new UserRepository(), new CommentRepository())
 		{
 
 		}
 
-		public ProductsController(ICategoryRepository category, IProductRepository product, IUserRepository user)
+		public ProductsController(ICategoryRepository category, IProductRepository product, IUserRepository user, ICommentRepository comment)
 		{
 			_category = category;
 			_product = product;
+			_comment = comment;
 			_user = user;
 		}
 
@@ -35,17 +39,68 @@ namespace Article.Controllers
 		[Route("/Single/{id}")]
 		public async Task<ActionResult> Single(int Id)
 		{
-			var model = await _product.GetByIdAsync(Id);
-			ViewBag.RelatedProducts = await _product.GetPageByCategoryAsync(1, 8, (int)model.CategoryId);
+			var product = await _product.GetByIdAsync(Id);
+
+			var model = new ProductDetailViewModel
+			{
+				ProductId = product.Id,
+				PersianTitle = product.NamePersian,
+				EnglishTitle = product.NameEnglish,
+				PersianDescription = product.DescriptionPersian,
+				EnglishDescription = product.DescriptionEnglish,
+				Price = product.Price,
+				Discount = product.Discount,
+				SKU = product.SKU,
+				Source = product.Source,
+				YearPublish = product.YearPublish,
+				ImageUrl = product.ImageUrl,
+				AuthorName = product.AuthorName,
+				RelatedProduct = await _product.GetPageByCategoryAsync(1, 8, (int) product.CategoryId),
+				Comments = await _comment.GetAllByProductId(Id)
+			};
 
 			return View(model: model, viewName: "Single");
+		}
+
+		[HttpPost]
+		public async Task<ActionResult> Comment(ProductDetailViewModel model)
+		{
+			var comment = new Comment();
+			try
+			{
+				if (!ModelState.IsValid)
+				{
+					return RedirectToAction("Single", new { id = model.ProductId });
+
+				}
+
+				comment.Title = model.CommentTitle;
+				comment.Desciption = model.CommentDescription;
+				comment.Email = model.Email;
+				comment.Name = model.PersonName;
+				comment.Price = model.SurveyPrice;
+				comment.Vakue = model.SurveyValue;
+				comment.ProductId = model.ProductId;
+				
+
+				await _comment.CreateAsync(comment);
+				ViewBag.CommentRelatedProduct = await _comment.GetAllByProductId((int)model.ProductId);
+				return RedirectToAction("Single",new {id = model.ProductId});
+
+			}
+			catch (Exception e)
+			{
+				ModelState.AddModelError(string.Empty, e.Message);
+				return RedirectToAction("Single", new { id = model.ProductId });
+
+			}
 		}
 
 		// GET: Download
 		public async Task<FileResult> Download(int? Id)
 		{
 			var id = Id == 0 || Id == null ? (int)TempData["Id"] : Id;
-			var model = await _product.GetByIdAsync((int) id);
+			var model = await _product.GetByIdAsync((int)id);
 
 			byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath(model.FileUrl));
 			string fileName = model.NameEnglish;
@@ -86,6 +141,6 @@ namespace Article.Controllers
 			return View(model: model);
 		}
 
-		
+
 	}
 }

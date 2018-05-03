@@ -88,6 +88,9 @@
     <Compile Include="Entities\Category.cs">
       <DependentUpon>Article.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Comment.cs">
+      <DependentUpon>Article.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Order.cs">
       <DependentUpon>Article.tt</DependentUpon>
     </Compile>
@@ -102,6 +105,7 @@
     </Compile>
     <Compile Include="Entities\UserIdentity.cs" />
     <Compile Include="Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Interfaces\ICommentRepository.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\IRoleRepository.cs" />
     <Compile Include="Interfaces\ITagRepository.cs" />

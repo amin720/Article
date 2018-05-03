@@ -20,6 +20,10 @@ ul,
 li,
 .menu-1,
 a,
+tr,
+td,
+table,
+thead,
 input[type="submit"],
 input[type="email"],
 input[type="text"],
@@ -27,7 +31,8 @@ input[type="text"],
 .btn,
 span,
 .tooltip,
-.tp-caption.LargeTitle {
+.tp-caption.LargeTitle,
+#product-review-table th, #product-review-table td, #customer-reviews .form-list li label {
     font-family: BHoma, Arial, Helvetica, sans-serif !important;
     letter-spacing: normal !important;
 }
@@ -86,4 +91,65 @@ a.text-black:focus {
 }
 #search {
     width: 88%;
+}
+#product-review-table th, #product-review-table td {
+    text-align: center;
+}
+#customer-reviews h3, #customer-reviews h4, #customer-reviews .form-list li label, button.button span {
+    font-size: 1.2345em;
+}
+button.button.submit:before {
+    content: "\f04b";
+    font-family: FontAwesome;
+    font-size: 15px;
+    padding-left: 8px;
+}
+
+
+.rating-box .rating-0 {
+    width: 0%;
+    float: left;
+    height: 15px;
+    background: url(../images/bkg_rating.png) 0 100% repeat-x;
+}
+.rating-box .rating-1 {
+    width: 20%;
+    float: left;
+    height: 15px;
+    background: url(../images/bkg_rating.png) 0 100% repeat-x;
+}
+.rating-box .rating-2 {
+    width: 40%;
+    float: left;
+    height: 15px;
+    background: url(../images/bkg_rating.png) 0 100% repeat-x;
+}
+.rating-box .rating-3 {
+    width: 60%;
+    float: left;
+    height: 15px;
+    background: url(../images/bkg_rating.png) 0 100% repeat-x;
+}
+.rating-box .rating-4 {
+    width: 80%;
+    float: left;
+    height: 15px;
+    background: url(../images/bkg_rating.png) 0 100% repeat-x;
+}
+.rating-box .rating-5 {
+    width: 100%;
+    float: left;
+    height: 15px;
+    background: url(../images/bkg_rating.png) 0 100% repeat-x;
+}
+
+
+.box-reviews .ratings-table {
+    float: right;
+}
+.box-reviews .review {
+    border-right: 1px solid #DFDFDF;
+    float: right;
+    padding-right: 2.5em;
+    width: 84%;
 }

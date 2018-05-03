@@ -3914,7 +3914,7 @@ fieldset {
 	overflow: hidden;
 }
 .rating-box .rating {
-	width:60%;
+	/*width:60%;*/
 	float: left;
 	height: 15px;
 	background: url(../images/bkg_rating.png) 0 100% repeat-x;

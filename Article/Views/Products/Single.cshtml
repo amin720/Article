@@ -1,7 +1,9 @@
-﻿@model Article.Core.Entities.Product
+﻿@model Article.ViewModels.ProductDetailViewModel
 @{
-    ViewBag.Title = Model.NamePersian + Model.NameEnglish;
+    ViewBag.Title = Model.PersianTitle + Model.EnglishTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var count = 1;
 }
 
 <!-- main-container -->
@@ -28,7 +30,7 @@
                             <div class="product-shop col-lg-6 col-sm-6 col-xs-12">
                                 @*<div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a class="product-prev" href="#"><span></span></a> </div>*@
                                 <div class="product-name">
-                                    <h1>@Model.NamePersian</h1>
+                                    <h1>@Model.PersianTitle</h1>
                                 </div>
                                 @*<div class="ratings">
                                         <div class="rating-box">
@@ -63,7 +65,7 @@
                                 <div class="add-to-box pull-right">
                                     <div class="add-to-cart">
                                         @*<button onClick="productAddToCartForm.submit(this)" class="button btn-cart" title="دانلود فایل" type="button"><span><i class="icon-basket"></i>دانلود مقاله</span></button>*@
-                                        <a href="@Url.Action("Buy","Products",new {Id = Model.Id})" class="button btn-cart" title="دانلود فایل" type="button"><span><i class="icon-basket"></i>دانلود مقاله</span></a>
+                                        <a href="@Url.Action("Buy","Products",new {Id = Model.ProductId})" class="button btn-cart" title="دانلود فایل" type="button"><span><i class="icon-basket"></i>دانلود مقاله</span></a>
                                         <div class="email-addto-box">
                                             <p class="email-friend"><a href="#" class=""><span>ارسال ایمیل به دوستان</span></a></p>
                                         </div>
@@ -103,6 +105,7 @@
                                 <li class="active"> <a href="#product_tabs_article" data-toggle="tab"> اطلاعات مقاله </a> </li>
                                 <li> <a href="#product_tabs_description_Persian" data-toggle="tab"> توضیحات فارسی </a> </li>
                                 <li> <a href="#product_tabs_description_English" data-toggle="tab"> توضیحات انگلیسی </a> </li>
+                                <li> <a href="#reviews_tabs" data-toggle="tab">نظرات </a> </li>
                             </ul>
                             <div id="productTabContent" class="tab-content">
                                 <div class="tab-pane fade in active" id="product_tabs_article">
@@ -111,8 +114,8 @@
                                             <li class="list-group-item list-group-item-info">
                                                 <span class="text-bold">عنوان مقاله</span>
                                                 <ul class="list-group text-black">
-                                                    <li class="list-group-item">@Model.NamePersian </li>
-                                                    <li class="list-group-item">@Model.NameEnglish </li>
+                                                    <li class="list-group-item">@Model.PersianTitle </li>
+                                                    <li class="list-group-item">@Model.EnglishTitle </li>
                                                 </ul>
                                             </li>
                                             <li class="list-group-item list-group-item-info">
@@ -136,17 +139,165 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade in active" id="product_tabs_description_Persian">
+                                <div class="tab-pane fadeIn" id="product_tabs_description_Persian">
                                     <div class="std">
-                                        @Html.Raw(Model.DescriptionPersian)
+                                        @Html.Raw(Model.PersianDescription)
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="product_tabs_description_English">
                                     <div class="std">
-                                        @Html.Raw(Model.DescriptionEnglish)
+                                        @Html.Raw(Model.EnglishDescription)
                                     </div>
                                 </div>
+                                <div class="tab-pane fadeIn" id="reviews_tabs">
+                                    <div class="box-collateral box-reviews" id="customer-reviews">
+                                        <div class="box-reviews1">
+                                            <div class="form-add" dir="rtl">
+                                                @using (Html.BeginForm("Comment", "Products", FormMethod.Post, new { @class = "", id = "review-form" }))
+                                                {
+                                                    <h3>نظر خود را بنویسید</h3>
+                                                    <fieldset>
+                                                        <h4>شما چه امتیازی به این محصول می دهید؟ <em class="required">*</em></h4>
+                                                        <span id="input-message-box"></span>
+                                                        <table id="product-review-table" class="data-table">
 
+                                                            <thead>
+                                                                <tr class="first last">
+                                                                    <th>&nbsp;</th>
+                                                                    <th><span class="nobr">1 *</span></th>
+                                                                    <th><span class="nobr">2 *</span></th>
+                                                                    <th><span class="nobr">3 *</span></th>
+                                                                    <th><span class="nobr">4 *</span></th>
+                                                                    <th><span class="nobr">5 *</span></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="first odd">
+                                                                    <th>قیمت</th>
+                                                                    <td class="value"><input type="radio" class="radio" value="1" id="Price_1" name="SurveyPrice"></td>
+                                                                    <td class="value"><input type="radio" class="radio" value="2" id="Price_2" name="SurveyPrice"></td>
+                                                                    <td class="value"><input type="radio" class="radio" value="3" id="Price_3" name="SurveyPrice"></td>
+                                                                    <td class="value"><input type="radio" class="radio" value="4" id="Price_4" name="SurveyPrice"></td>
+                                                                    <td class="value last"><input type="radio" class="radio" value="5" id="SurveyPrice" name="SurveyPrice"></td>
+                                                                </tr>
+                                                                <tr class="even">
+                                                                    <th>ارزش خرید</th>
+                                                                    <td class="value"><input type="radio" class="radio" value="1" id="Value_1" name="SurveyValue"></td>
+                                                                    <td class="value"><input type="radio" class="radio" value="2" id="Value_2" name="SurveyValue"></td>
+                                                                    <td class="value"><input type="radio" class="radio" value="3" id="Value_3" name="SurveyValue"></td>
+                                                                    <td class="value"><input type="radio" class="radio" value="4" id="Value_4" name="SurveyValue"></td>
+                                                                    <td class="value last"><input type="radio" class="radio" value="5" id="SurveyValue" name="SurveyValue"></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                        <input type="hidden" class="validate-rating" name="ProductId" value="@Model.ProductId">
+                                                        <div class="review1">
+                                                            <ul>
+                                                                <li>
+                                                                    <label class="label-wide" for="review_field"> نظر <em style="color: #ff0000">*</em></label>
+                                                                    <div class="input-box">
+                                                                        <textarea class="required-entry" rows="3" cols="5" id="CommentDescription" name="CommentDescription"></textarea>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="buttons-set">
+                                                                <button class="button submit" title="ثبت نظر" type="submit"><span>ثبت نظر</span></button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="review2">
+                                                            <ul class="form-list">
+                                                                <li>
+                                                                    <label class="required" for="nickname_field">نام و نام خانوادگی<em>*</em></label>
+                                                                    <div class="input-box">
+                                                                        <input type="text" class="input-text required-entry" id="PersonName" name="PersonName">
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <label class="required" for="summary_field">عنوان<em>*</em></label>
+                                                                    <div class="input-box">
+                                                                        <input type="text" class="input-text required-entry" id="CommentTitle" name="CommentTitle">
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+
+                                                        </div>
+                                                    </fieldset>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="box-reviews2" dir="rtl">
+                                            <h3>نظرات مشتریان</h3>
+                                            <div class="box visible">
+                                                <ul>
+                                                    @foreach (var item in Model.Comments)
+                                                    {
+                                                        if ((count / 2) == 1)
+                                                        {
+                                                            <li class="even">
+                                                                <table class="ratings-table">
+
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th>ارزش خرید</th>
+                                                                            <td>
+                                                                                <div class="rating-box">
+                                                                                    <div class="rating"></div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>قیمت</th>
+                                                                            <td>
+                                                                                <div class="rating-box">
+                                                                                    <div class="rating"></div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <div class="review">
+                                                                    <h6><a href="@Url.Action("Single",new {id = item.ProductId})">@item.Title</a></h6>
+                                                                    <div class="review-txt"> @item.Desciption</div>
+                                                                </div>
+                                                            </li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li>
+                                                                <table class="ratings-table">
+
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th>ارزش خرید</th>
+                                                                            <td>
+                                                                                <div class="rating-box" id="test">
+                                                                                    <div class="rating-@item.Vakue" ></div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>قیمت</th>
+                                                                            <td>
+                                                                                <div class="rating-box">
+                                                                                    <div class="rating-@item.Price"></div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <div class="review">
+                                                                    <h6><a href="@Url.Action("Single",new {id = item.ProductId})">@item.Title</a></h6>
+                                                                    <div class="review-txt"> @item.Desciption</div>
+                                                                </div>
+                                                            </li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -159,7 +310,7 @@
                                         <div id="related-products-slider" class="product-flexslider hidden-buttons">
                                             <div class="slider-items slider-width-col4">
 
-                                                @foreach (var item in ViewBag.RelatedProducts)
+                                                @foreach (var item in Model.RelatedProduct)
                                                 {
                                                     <!-- Item -->
                                                     <div class="item">
