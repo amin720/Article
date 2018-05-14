@@ -153,3 +153,45 @@ button.button.submit:before {
     padding-right: 2.5em;
     width: 84%;
 }
+
+.blmd-wrapp .blmd-continer form#login-form > h1 {
+    text-align: center;
+    border-right: 5px solid #26a69a;
+    border-left: 0;
+}
+
+.blmd-form .blmd-label {
+    right: 0;
+    left: auto;
+}
+
+.blmd-wrapp .blmd-header-wrapp .blmd-switches > button {
+    left: -30px;
+    right: auto;
+}
+.mini-products-list .product-image {
+    float: right;
+}
+.mini-products-list .detail-item {
+    margin-right:92px
+}
+.top-cart-content .product-details {
+    color: #333333;
+    position: relative;
+    text-align: right;
+    padding: 0px;
+}
+.top-subtotal {
+    color: #333333;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 12px 15px;
+    text-align: right;
+    text-transform: none;
+    border-bottom: 1px #ddd solid;
+    border-top: 1px #ddd solid;
+}
+    .top-subtotal .price {
+        float: left;
+        font-size: 15px;  
+    }

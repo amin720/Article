@@ -66,6 +66,7 @@
           <Property Name="Count" Type="int" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -151,6 +152,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" />
         </EntityType>
+        <Association Name="FK_CartItem_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="CartItem" Type="Self.CartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CartItem">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CartItem_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="CartItem" Type="Self.CartItem" Multiplicity="*" />
@@ -329,6 +342,10 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTag" EntityType="Self.ProductTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CartItem_AspNetUsers" Association="Self.FK_CartItem_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CartItem" EntitySet="CartItem" />
+          </AssociationSet>
           <AssociationSet Name="FK_CartItem_Product" Association="Self.FK_CartItem_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="CartItem" EntitySet="CartItem" />
@@ -405,6 +422,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="ArticleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartItem_AspNetUsers" Association="ArticleModel.FK_CartItem_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="CartItem" EntitySet="CartItems" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_AspNetUsers" Association="ArticleModel.FK_Product_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -491,6 +512,7 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="ArticleModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="ArticleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="CartItems" Relationship="ArticleModel.FK_CartItem_AspNetUsers" FromRole="AspNetUser" ToRole="CartItem" />
           <NavigationProperty Name="Products" Relationship="ArticleModel.FK_Product_AspNetUsers" FromRole="AspNetUser" ToRole="Product" />
           <NavigationProperty Name="AspNetRoles" Relationship="ArticleModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
@@ -503,6 +525,8 @@
           <Property Name="Count" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="ArticleModel.FK_CartItem_AspNetUsers" FromRole="CartItem" ToRole="AspNetUser" />
           <NavigationProperty Name="Product" Relationship="ArticleModel.FK_CartItem_Product" FromRole="CartItem" ToRole="Product" />
         </EntityType>
         <EntityType Name="Category">
@@ -619,6 +643,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartItem_AspNetUsers">
+          <End Type="ArticleModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="ArticleModel.CartItem" Role="CartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CartItem">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -770,6 +806,7 @@
           <EntitySetMapping Name="CartItems">
             <EntityTypeMapping TypeName="ArticleModel.CartItem">
               <MappingFragment StoreEntitySet="CartItem">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Count" ColumnName="Count" />

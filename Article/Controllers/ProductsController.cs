@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Article.Core.Entities;
 using Article.Core.Interfaces;
 using Article.Infrastructure.Repository;
+using Article.Services;
 using Article.ViewModels;
 
 namespace Article.Controllers
@@ -40,6 +41,18 @@ namespace Article.Controllers
 		public async Task<ActionResult> Single(int Id)
 		{
 			var product = await _product.GetByIdAsync(Id);
+			var user = await GetloggedInUser();
+
+			IEnumerable<CartItem> carts = null;
+			var cart = new ShoppingCart(HttpContext);
+			if (user == null)
+			{
+				carts = await cart.GetCartItemsAsync(String.Empty);
+			}
+			else
+			{
+				carts = await cart.GetCartItemsAsync(user.Id);
+			}
 
 			var model = new ProductDetailViewModel
 			{
@@ -56,7 +69,8 @@ namespace Article.Controllers
 				ImageUrl = product.ImageUrl,
 				AuthorName = product.AuthorName,
 				RelatedProduct = await _product.GetPageByCategoryAsync(1, 8, (int) product.CategoryId),
-				Comments = await _comment.GetAllByProductId(Id)
+				Comments = await _comment.GetAllByProductId(Id),
+				CartItems = carts
 			};
 
 			return View(model: model, viewName: "Single");
@@ -141,6 +155,24 @@ namespace Article.Controllers
 			return View(model: model);
 		}
 
+		#region Method
 
+		private bool _isDisposed;
+		protected override void Dispose(bool disposing)
+		{
+			if (!_isDisposed)
+			{
+				_user.Dispose();
+			}
+
+			_isDisposed = true;
+			base.Dispose(disposing);
+		}
+		private async Task<UserIdentity> GetloggedInUser()
+		{
+			return await _user.GetUserByNameAsync(User.Identity.Name);
+		}
+
+		#endregion
 	}
 }

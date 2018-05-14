@@ -4,8 +4,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var count = 1;
+    decimal discount = 0m;
 }
 
+@section Carts{
+    <div class="top-cart-content arrow_box">
+        <div class="block-subtitle">موارد اضافه شده اخیر</div>
+        <ul id="cart-sidebar" class="mini-products-list">
+            @foreach (var item in Model.CartItems)
+            {
+                <li class="item even">
+                    <a class="product-image" href="#" title="@item.Product.NamePersian"><img alt="Downloadable Product " src="@Url.Content(item.Product.ImageUrl)" width="80"></a>
+                    <div class="detail-item">
+                        <div class="product-details">
+                            @*<a href="#" title="حذف این مورد" onClick="" class="glyphicon glyphicon-remove" style="color: red">&nbsp;</a>*@
+                            <a href="#" title="حذف این مورد" data-productid="@item.Product.Id" onClick="removeFromCart(this,event)" class="label label-danger" style="color: white; float: left; font-size: 1.3em;">حذف</a>
+                            <p class="product-name">
+                                <a href="@Url.Action("Single","Products",new{Id = item.Product.Id})" title="مشاهده محصول">@item.Product.NamePersian </a>
+                            </p>
+                        </div>
+                        <div class="product-details-bottom">
+                            <span class="title-desc">قیمت واحد:</span> <span class="price">@item.Product.Price تومان</span>  تعداد: <strong>@item.Count</strong>
+                        </div>
+                    </div>
+                </li>
+
+                if (item.Product.Discount == null)
+                {
+                    item.Product.Discount = 0;
+                }
+                discount = discount + (decimal)item.Product.Discount;
+            }
+        </ul>
+        @{
+            var total = 0m;
+
+            foreach (var item in Model.CartItems)
+            {
+                total += (item.Product.Price * item.Count);
+            }
+
+            Model.TotalPriceItems = total;
+
+            total = 0m;
+
+            foreach (var item in Model.CartItems)
+            {
+                if (item.Product.Discount == null)
+                {
+                    item.Product.Discount = 0;
+                }
+
+                total += ((item.Product.Price - (decimal)item.Product.Discount) * item.Count);
+            }
+
+            Model.TotalPriceWithDiscount = total;
+        }
+        <div class="top-subtotal">
+            قیمت بدون تخفیف: <span class="price">@Model.TotalPriceItems</span>
+        </div>
+        <div class="top-subtotal">
+            مجموع تخفیفات: <span class="price">@discount</span>
+        </div>
+        <div class="top-subtotal">
+            قیمت کل: <span class="price">@Model.TotalPriceWithDiscount</span>
+        </div>
+        <div class="actions">
+            <a href="@Url.Action("Checkout","ShoppingCart")" class="btn-checkout" type="button"><span> اتمام </span></a>
+            @*<button class="view-cart" type="button"><span>View Cart</span></button>*@
+        </div>
+    </div>
+}
 <!-- main-container -->
 
 <section class="main-container col1-layout">
@@ -65,7 +134,18 @@
                                 <div class="add-to-box pull-right">
                                     <div class="add-to-cart">
                                         @*<button onClick="productAddToCartForm.submit(this)" class="button btn-cart" title="دانلود فایل" type="button"><span><i class="icon-basket"></i>دانلود مقاله</span></button>*@
-                                        <a href="@Url.Action("Buy","Products",new {Id = Model.ProductId})" class="button btn-cart" title="دانلود فایل" type="button"><span><i class="icon-basket"></i>دانلود مقاله</span></a>
+                                        @*<a href="@Url.Action("Buy","Products",new {Id = Model.ProductId})" class="button btn-cart" title="دانلود فایل" type="button"><span><i class="icon-basket"></i>دانلود مقاله</span></a>*@
+                                        <div class="actions">
+                                            @if (Request.IsAuthenticated)
+                                            {
+                                                <button type="button" title="اضافه کردن به سبد خرید" class="button btn-cart" onclick="addToCart(this, event)" data-productid="@Model.ProductId"><span>اضافه کردن به سبد خرید</span></button>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("Login","Account")" title="اضافه کردن به سبد خرید" class="button btn-cart"><span>اضافه کردن به سبد خرید</span></a>
+
+                                            }
+                                        </div>
                                         <div class="email-addto-box">
                                             <p class="email-friend"><a href="#" class=""><span>ارسال ایمیل به دوستان</span></a></p>
                                         </div>
@@ -272,7 +352,7 @@
                                                                             <th>ارزش خرید</th>
                                                                             <td>
                                                                                 <div class="rating-box" id="test">
-                                                                                    <div class="rating-@item.Vakue" ></div>
+                                                                                    <div class="rating-@item.Vakue"></div>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -392,4 +472,62 @@
 
     <script src="~/assets/js/jquery.jcarousel.min.js"></script>
     <script src="~/assets/js/cloudzoom.js"></script>
+    
+    <script>
+        function addToCart(sender, e) {
+            debugger;
+
+            var productid = sender.dataset.productid;
+
+            $.ajax({
+                type: "POST",
+                url: '/ShoppingCart/AddToCart',
+                data: { productId: productid },
+                dataType: "json",
+                success: function (response) {
+                    debugger;
+                    $('#invoice').load(window.location.href + " #invoice");
+                    alert('محصول اضافه شد');
+
+                },
+                error: function (event, jqxhr, settings, thrownError) {
+                    debugger;
+                    $('#invoice').load(window.location.href + " #invoice");
+                    alert('محصول اضافه شد');
+
+                    //alert(settings);
+                    //alert(thrownError);
+                    //alert("failed");
+                }
+            });
+        }
+
+        function removeFromCart(sender,e) {
+            debugger;
+
+            var productid = sender.dataset.productid;
+
+            $.ajax({
+                type: "POST",
+                url: '/ShoppingCart/RemoveFromCart',
+                data: { productId: productid },
+                dataType: "json",
+                success: function (response) {
+                    debugger;
+                    $('#invoice').load(window.location.href + " #invoice");
+                    alert('محصول حذف شد');
+
+                },
+                error: function (event, jqxhr, settings, thrownError) {
+                    debugger;
+                    $('#invoice').load(window.location.href + " #invoice");
+                    alert('محصول حذف شد');
+
+                    //alert(settings);
+                    //alert(thrownError);
+                    //alert("failed");
+                }
+            });
+        };
+    </script>
 }

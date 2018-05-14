@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Article.Core.Interfaces;
@@ -41,6 +42,18 @@ namespace Article.Controllers
 			var bookProducts = await _product.GetPageByCategoryTypeAsync(1, 5, "book");
 			var artistProducts = await _product.GetPageByCategoryAsync(1, 5, "گرافیک");
 			var engeenierProducts = await _product.GetPageByCategoryAsync(1, 5, "کامپیوتر");
+			var user = await GetloggedInUser();
+
+			IEnumerable<CartItem> carts = null;
+			var cart = new ShoppingCart(HttpContext);
+			if (user == null)
+			{
+				 carts = await cart.GetCartItemsAsync(String.Empty);
+			}
+			else
+			{
+				 carts = await cart.GetCartItemsAsync(user.Id);
+			}
 
 			var model = new ProductsManagerViewModel
 			{
@@ -48,7 +61,8 @@ namespace Article.Controllers
 				FreeProducts = freeProducts.Where(p => p.Price == 0).Shuffle(),
 				BookProducts = bookProducts.Shuffle(),
 				ArtisticProducts = artistProducts.Shuffle(),
-				EngeenierProducts = engeenierProducts.Shuffle()
+				EngeenierProducts = engeenierProducts.Shuffle(),
+				CartItems = carts
 			};
 
 			return View(model);
@@ -125,7 +139,21 @@ namespace Article.Controllers
 
 			return totalPage;
 		}
+		private bool _isDisposed;
+		protected override void Dispose(bool disposing)
+		{
+			if (!_isDisposed)
+			{
+				_user.Dispose();
+			}
 
+			_isDisposed = true;
+			base.Dispose(disposing);
+		}
+		private async Task<UserIdentity> GetloggedInUser()
+		{
+			return await _user.GetUserByNameAsync(User.Identity.Name);
+		}
 		#endregion
 	}
 }

@@ -19,7 +19,9 @@ namespace Article.Core.Entities
         public int Count { get; set; }
         public System.DateTime DateCreated { get; set; }
         public int ProductId { get; set; }
+        public string UserId { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Product Product { get; set; }
     }
 }

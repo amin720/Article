@@ -1,0 +1,127 @@
+﻿@model Article.ViewModels.CheckoutViewModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal discount = 0m;
+    decimal TotalPriceItems = 0m;
+    decimal TotalPriceWithDiscount = 0m;
+
+}
+
+<div class="container" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-pricing table-responsive table-vcenter" dir="rtl">
+                <thead>
+                <tr>
+                    <th>(فارسی) نام کالا</th>
+                    <th>نام کالا (انگلیسی)</th>
+                    <th>قیمت</th>
+                    <th>تعداد</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td>@item.Product.NamePersian</td>
+                        <td>@item.Product.NameEnglish</td>
+                        <td>@item.Product.Price</td>
+                        <td>@item.Count</td>
+                    </tr>
+
+                    if (item.Product.Discount == null)
+                    {
+                        item.Product.Discount = 0;
+                    }
+                    discount = discount + (decimal)item.Product.Discount;
+                }
+                </tbody>
+                @{
+                    var total = 0m;
+
+                    foreach (var item in Model.CartItems)
+                    {
+                        total += (item.Product.Price * item.Count);
+                    }
+
+                    TotalPriceItems = total;
+
+                    total = 0m;
+
+                    foreach (var item in Model.CartItems)
+                    {
+                        if (item.Product.Discount == null)
+                        {
+                            item.Product.Discount = 0;
+                        }
+
+                        total += ((item.Product.Price - (decimal)item.Product.Discount) * item.Count);
+                    }
+
+                    TotalPriceWithDiscount = total;
+                }
+                <tfoot>
+                <tr>
+                    <td>قیمت کل</td>
+                    <td>@TotalPriceWithDiscount</td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <form action="@Url.Action("Checkout")" method="POST" id="braintree-payment-form" class="form-horizontal" dir="rtl">
+        @Html.AntiForgeryToken()
+        <h2>اتمام خرید</h2>
+        @Html.ValidationSummary()
+        <fieldset>
+            <legend>اطلاعات خرید</legend>
+        
+            <div class="row" dir="rtl">
+                <div class="col-xs-2"><label for="FirstName">نام</label></div>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" name="FirstName" id="FirstName" value="@Model.FirstName"/>
+                </div>
+            </div>
+            <div class="row" dir="rtl">
+                <div class="col-xs-2"><label for="Phone">تلفن</label></div>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" name="Phone" id="Phone" value="@Model.Phone" />
+                </div>
+            </div>
+            <div class="row" dir="rtl">
+                <div class="col-xs-2"><label for="Email">ایمیل</label></div>
+                <div class="col-xs-6">
+                    <input type="email" class="form-control" name="Email" id="Email" value="@Model.Email" />
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>اطلاعات پرداخت</legend>
+            <div class="row" dir="rtl">
+                <div class="col-xs-2"><label for="CardNumber">شماره کارت</label></div>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" size="20" autocomplete="off" data-encrypted-name="CardNumber" name="CardNumber" id="CardNumber" value="@Model.CardNumber" />
+                </div>
+            </div>
+            <div class="row" dir="rtl">
+                <div class="col-xs-2"><label for="Cvv">شماره Cvv</label></div>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" size="5" autocomplete="off" data-encrypted-name="Cvv" name="Cvv" id="Cvv" value="@Model.Cvv" />
+                </div>
+            </div>
+            <div class="row" dir="rtl">
+                <div class="col-xs-2"><label for="Year">(YYYY/MM) سال انقضا  </label></div>
+                <div class="col-xs-6">
+                    <input type="text"  size="2" name="Month" value="@Model.Month" /> / <input type="text" size="4" autocomplete="off" data-encrypted-name="Year" name="Year" id="Year" value="@Model.Year" />
+                </div>
+            </div>
+      
+        </fieldset>
+        <input class="btn btn-continue" type="submit" value="ارسال" />
+    </form>
+</div>
+
+
+
+

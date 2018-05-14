@@ -29,7 +29,12 @@ namespace Article.ViewModels
 		public int SurveyValue { get; set; }
 		public int SurveyPrice { get; set; }
 
+		public decimal TotalPriceItems { get; set; }
+		public decimal TotalPriceWithDiscount { get; set; }
+
 		public IEnumerable<Product> RelatedProduct { get; set; }
 		public IEnumerable<Comment> Comments { get; set; }
+		public IEnumerable<CartItem> CartItems { get; set; }
+
 	}
 }

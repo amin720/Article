@@ -1,0 +1,133 @@
+﻿@model Article.ViewModels.AccountViewModel
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت نام و ورود کاربر</title>
+
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/css/style-login.css" rel="stylesheet" />
+    <link href="~/assets/css/custom.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3 col-xs-12">
+            <!--  Start login box wrapper -->
+            <div class="blmd-wrapp">
+                <div class="blmd-color-conatiner ripple-effect-All"></div>
+                <div class="blmd-header-wrapp ">
+                    <div class="blmd-switches">
+                        <button class="btn btn-circle btn-lg btn-blmd ripple-effect btn-success blmd-switch-button">
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="#fff" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="blmd-continer">
+                    <!-- Login form container -->
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "clearfix", id = "login-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h1>ورود</h1>
+                        <div class="col-md-12">
+                            <div class="pull-right" dir="rtl">
+                                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                                @Html.ValidationMessageFor(model => model.Username, "", new {@class = "text-danger"})
+                                @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+                            </div>
+                           
+                            <div class="input-group blmd-form">
+                                <div class="blmd-line">
+                                    <input type="text" name="Username" autocomplete="off" id="username" class="form-control">
+                                    <label class="blmd-label">ورود کاربران</label>
+                                </div>
+                            </div>
+                            <div class="input-group blmd-form">
+                                <div class="blmd-line">
+                                    <input type="password" name="Password" autocomplete="off" id="password" class="form-control">
+                                    <label class="blmd-label">رمز عبور</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <input type="submit" class="btn btn-blmd ripple-effect btn-warning btn-lg btn-block" value="ورود" />
+                        </div>
+                        <br />}
+                    <!-- Login form container -->
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "clearfix form-hidden", id = "Register-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h1>ثبت نام</h1>
+
+                        <div class="col-md-12">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.ConfrimedPassword, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+
+                            <div class="input-group blmd-form">
+                                <div class="blmd-line">
+                                    <input type="text" name="Username" autocomplete="off" id="username" class="form-control">
+                                    <label class="blmd-label">نام کاربری</label>
+                                </div>
+                            </div>
+                            <div class="input-group blmd-form">
+                                <div class="blmd-line">
+                                    <input type="email" name="Email" autocomplete="off" id="username" class="form-control">
+                                    <label class="blmd-label">ایمیل</label>
+                                </div>
+                            </div>
+                            <div class="input-group blmd-form">
+                                <div class="blmd-line">
+                                    <input type="password" name="Password" autocomplete="off" id="password" class="form-control">
+                                    <label class="blmd-label">رمز عبور</label>
+                                </div>
+                            </div>
+                            <div class="input-group blmd-form">
+                                <div class="blmd-line">
+                                    <input type="password" name="ConfrimedPassword" autocomplete="off" id="password" class="form-control">
+                                    <label class="blmd-label">تکرار رمز عبور</label>
+                                </div>
+                            </div>
+                            <div class="input-group blmd-form">
+                                <div class="blmd-line">
+                                    <input type="text" name="FullName" autocomplete="off" id="FullName" class="form-control">
+                                    <label class="blmd-label">نام و نام خانوادگی</label>
+                                </div>
+                            </div>
+                            <div class="input-group blmd-form">
+                                <div class="blmd-line">
+                                    <input type="text" name="Mobile" autocomplete="off" id="Mobile" class="form-control">
+                                    <label class="blmd-label">موبایل</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            @*<button type="button" class="btn btn-blmd ripple-effect btn-warning btn-lg btn-block">Register</button>*@
+                            <input type="submit" class="btn btn-blmd ripple-effect btn-warning btn-lg btn-block" value="ثبت نام" />
+                        </div>
+                        <br />
+
+
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/js-login.js"></script>
+
+</body>
+</html>

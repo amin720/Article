@@ -8,7 +8,6 @@ namespace Article.Services
 	public static class ThreadSafeRandom
 	{
 		[ThreadStatic] private static Random Local;
-
 		public static Random ThisThreadsRandom
 		{
 			get { return Local ?? (Local = new Random(unchecked(Environment.TickCount * 31 + Thread.CurrentThread.ManagedThreadId))); }
@@ -16,6 +15,8 @@ namespace Article.Services
 	}
 	public static class Extensions
 	{
+		private static readonly Random _random = new Random();
+
 		public static void Shuffle<T>(this IList<T> list)
 		{
 			int n = list.Count;
@@ -44,6 +45,13 @@ namespace Article.Services
 			}
 
 			return array;
+		}
+
+		public static string RandomString(int length)
+		{
+			const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			return new string(Enumerable.Repeat(chars, length)
+				.Select(s => s[_random.Next(s.Length)]).ToArray());
 		}
 
 	}
