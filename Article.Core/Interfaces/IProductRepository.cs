@@ -8,6 +8,7 @@ namespace Article.Core.Interfaces
 	{
 		Task<Product> GetByIdAsync(int id);
 		Task<IEnumerable<Product>> GetAllByCategoryAsync(string category);
+		Task<IEnumerable<Product>> GetAllByUserAsync(string userId);
 		Task<IEnumerable<Product>> GetAllAsync();
 		Task CreateAsync(Product model);
 		Task EditAsync(int id, Product updateItem);

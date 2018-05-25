@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Article.Areas.User.Models.OrderDetailsViewModel>
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/User/Views/Shared/_LayoutUserPage.cshtml";
+    
+    var counter = 1;
+}
+
+
+<div class="row" dir="rtl">
+    <div class="block full col-sm-12">
+        <div class="block-title">
+            <h2>دسته بندی ها</h2>
+        </div>
+        <div class="table-responsive" dir="ltr" id="tableElm">
+            <table id="example-datatable" class="table table-striped table-bordered table-vcenter">
+                <thead>
+                <tr class="text-center">
+                    <th style="width: 50px;">شماره</th>
+                    <th>شماره فاکتور</th>
+                    <th>نام محصول</th>
+                    <th style="width: 120px;">تعداد</th>
+                    <th>فی</th>
+                    <th class="text-center" style="width: 75px;"><i class="fa fa-flash"></i></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var child in Model)
+                {
+                    <tr>
+                        <td class="text-center">@counter</td>
+                        <td class="text-center"><strong>@child.NumberOrder</strong></td>
+                        <td class="text-center"><strong>@child.ProductName</strong></td>
+                        <td class="text-center"><strong>@child.Qty</strong></td>
+                        <td class="text-center"><strong>@child.UnitPrice</strong></td>
+
+                        <td class="text-center">
+                            <a href="@Url.Action("Index", "ReportUser")" data-toggle="tooltip" title="مشاهده فاکتور ها" class="btn btn-effect-ripple btn-xs btn-success"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                    counter++;
+                }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

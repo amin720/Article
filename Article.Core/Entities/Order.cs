@@ -23,8 +23,7 @@ namespace Article.Core.Entities
         public int Id { get; set; }
         public System.DateTime OrderDate { get; set; }
         public string TransactionId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FullName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public decimal Total { get; set; }

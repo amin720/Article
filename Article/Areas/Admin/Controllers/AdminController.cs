@@ -33,7 +33,8 @@ namespace Article.Areas.Admin.Controllers
 		// GET: Admin/Admin
 	    [Route("")]
 		public async Task<ActionResult> Index()
-	    {
+
+		{
 		    var users = await _userRepository.GetAllUsersAsync();
 		    var categories = await _categoryRepostitory.GetAllAsync();
 		    int articleCount = categories.Count(c => c.CategoryType == "article");
@@ -112,7 +113,8 @@ namespace Article.Areas.Admin.Controllers
 	    // GET: Admin/Admin/Logout
 	    [HttpGet]
 	    [Route("logout")]
-	    public async Task<ActionResult> Logout()
+	    [AllowAnonymous]
+		public async Task<ActionResult> Logout()
 	    {
 		    var authManager = HttpContext.GetOwinContext().Authentication;
 

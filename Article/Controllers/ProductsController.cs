@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -111,35 +113,87 @@ namespace Article.Controllers
 		}
 
 		// GET: Download
-		public async Task<FileResult> Download(int? Id)
-		{
-			var id = Id == 0 || Id == null ? (int)TempData["Id"] : Id;
-			var model = await _product.GetByIdAsync((int)id);
+		//public async Task<FileResult> Download(int? Id)
+		//{
+		//	var id = Id == 0 || Id == null ? (int)TempData["Id"] : Id;
+		//	var model = await _product.GetByIdAsync((int)id);
 
-			byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath(model.FileUrl));
-			string fileName = model.NameEnglish;
+		//	byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath(model.FileUrl));
+		//	string fileName = model.NameEnglish;
 
-			string contentType = string.Empty;
+		//	string contentType = string.Empty;
 
-			if (model.FileUrl.Contains(".pdf"))
-			{
-				contentType = "application/pdf";
-			}
+		//	if (model.FileUrl.Contains(".pdf"))
+		//	{
+		//		contentType = "application/pdf";
+		//	}
 
-			else if (model.FileUrl.Contains(".docx"))
-			{
-				contentType = "application/docx";
-			}
-			else
-			{
-				contentType = "application/doc";
-			}
+		//	else if (model.FileUrl.Contains(".docx"))
+		//	{
+		//		contentType = "application/docx";
+		//	}
+		//	else
+		//	{
+		//		contentType = "application/doc";
+		//	}
 
-			//return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
-			//return File(fileBytes, contentType, fileName);
-			return new FilePathResult(Server.MapPath(model.FileUrl), contentType);
+		//	//return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+		//	//return File(fileBytes, contentType, fileName);
+		//	return new FilePathResult(Server.MapPath(model.FileUrl), contentType);
 
-		}
+		//}
+		//public async Task<FileResult> Download(IList<string> files)
+		//{
+		//	var archive = Server.MapPath("~/archive.zip");
+		//	var temp = Server.MapPath("~/temp");
+
+		//	// clear any existing archive
+		//	if (System.IO.File.Exists(archive))
+		//	{
+		//		System.IO.File.Delete(archive);
+		//	}
+		//	// empty the temp folder
+		//	Directory.EnumerateFiles(temp).ToList().ForEach(f => System.IO.File.Delete(f));
+
+		//	// copy the selected files to the temp folder
+		//	foreach (var item in files)
+		//	{
+		//		System.IO.File.Copy(item, Path.Combine(temp, Path.GetFileName(item)));
+		//	}
+
+		//	// create a new archive
+		//	ZipFile.CreateFromDirectory(temp, archive);
+
+		//	return File(archive, "application/zip", "archive.zip");
+		//	//var id = Id == 0 || Id == null ? (int)TempData["Id"] : Id;
+		//	//var model = await _product.GetByIdAsync((int)id);
+
+
+
+		//	//byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath(model.FileUrl));
+		//	//string fileName = model.NameEnglish;
+
+		//	//string contentType = string.Empty;
+
+		//	//if (model.FileUrl.Contains(".pdf"))
+		//	//{
+		//	//	contentType = "application/pdf";
+		//	//}
+
+		//	//else if (model.FileUrl.Contains(".docx"))
+		//	//{
+		//	//	contentType = "application/docx";
+		//	//}
+		//	//else
+		//	//{
+		//	//	contentType = "application/doc";
+		//	//}
+
+		//	////return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+		//	////return File(fileBytes, contentType, fileName);
+		//	//return new FilePathResult(Server.MapPath(model.FileUrl), contentType);
+
+		//}
 
 		// GET: Buy
 		[Route("/Buy/{id}")]

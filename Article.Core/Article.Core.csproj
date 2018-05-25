@@ -100,6 +100,9 @@
     <Compile Include="Entities\Product.cs">
       <DependentUpon>Article.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\sysdiagram.cs">
+      <DependentUpon>Article.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Tag.cs">
       <DependentUpon>Article.tt</DependentUpon>
     </Compile>

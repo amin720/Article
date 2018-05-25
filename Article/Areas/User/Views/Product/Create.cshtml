@@ -1,0 +1,10 @@
+﻿@model Article.Areas.Admin.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/User/Views/Product/_ProductLayout.cshtml";
+}
+
+<h2>ایجاد</h2>
+
+@Html.Partial("_productForm", Model)

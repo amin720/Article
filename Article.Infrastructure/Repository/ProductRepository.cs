@@ -42,6 +42,22 @@ namespace Article.Infrastructure.Repository
 			}
 		}
 
+		public async Task<IEnumerable<Product>> GetAllByUserAsync(string userId)
+		{
+			using (var db = new ArticleEntities())
+			{
+				var product = await db.Products.Where(u => u.AuthorId == userId)
+					.ToListAsync();
+
+				if (product == null)
+				{
+					throw new KeyNotFoundException("The Products Category \"" + userId + "\" does not exist.");
+				}
+
+				return product;
+			}
+		}
+
 		public async Task<IEnumerable<Product>> GetAllAsync()
 		{
 			using (var db = new ArticleEntities())

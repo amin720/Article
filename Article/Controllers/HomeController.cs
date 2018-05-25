@@ -86,6 +86,19 @@ namespace Article.Controllers
 		//[Route("Shop")]
 		public async Task<ActionResult> Shop(int? pageSize, string categoryName, int? pageNumber = 1)
 		{
+			var user = await GetloggedInUser();
+
+			IEnumerable<CartItem> carts = null;
+			var cart = new ShoppingCart(HttpContext);
+			if (user == null)
+			{
+				carts = await cart.GetCartItemsAsync(String.Empty);
+			}
+			else
+			{
+				carts = await cart.GetCartItemsAsync(user.Id);
+			}
+
 			pageSize = 9;
 
 			pageNumber = pageNumber == null || pageNumber == 1 ? 1 : pageNumber;
@@ -104,6 +117,7 @@ namespace Article.Controllers
 			{
 				Categories = await _category.GetAllAsync(),
 				BestSeller = bestProducts.Shuffle(),
+				CartItems = carts
 			};
 
 			var products = string.IsNullOrEmpty(categoryName) ? await _product.GetAllAsync() : await _product.GetAllByCategoryAsync(categoryName);

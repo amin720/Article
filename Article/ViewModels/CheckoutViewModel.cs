@@ -7,35 +7,9 @@ namespace Article.ViewModels
 	public class CheckoutViewModel
 	{
 		[Required]
-		[Display(Name = "نام کوچک")]
+		[Display(Name = "نام و نام خانوادگی")]
 		[StringLength(160)]
-		public string FirstName { get; set; }
-
-		//[Required]
-		//[Display(Name = "Last Name")]
-		//[StringLength(160)]
-		//public string LastName { get; set; }
-
-		//[Required]
-		//[StringLength(70, MinimumLength = 3)]
-		//public string Address { get; set; }
-
-		//[Required]
-		//[StringLength(40)]
-		//public string City { get; set; }
-
-		//[Required]
-		//[StringLength(40)]
-		//public string State { get; set; }
-
-		//[Required]
-		//[Display(Name = "Postal Code")]
-		//[StringLength(10, MinimumLength = 5)]
-		//public string PostalCode { get; set; }
-
-		//[Required]
-		//[StringLength(40)]
-		//public string Country { get; set; }
+		public string FullName { get; set; }
 
 		[Required]
 		[StringLength(24)]

@@ -1,0 +1,19 @@
+﻿@model Article.Core.Entities.Product
+
+@{
+    ViewBag.Title = "حذف محصول";
+    Layout = "~/Areas/User/Views/Product/_ProductLayout.cshtml";
+}
+
+<h2>حذف @Model.NamePersian</h2>
+<h2>حذف @Model.NameEnglish
+    </h2>
+
+@using (var frm = Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Hidden("productId",Model.Id)
+
+    <input type="submit" value="Delete @Model.NamePersian" class="btn btn-danger btn-lg"/>
+}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -108,7 +109,7 @@ namespace Article.Services
 			var items = await GetCartItemsAsync(model.UserId);
 			var order = new Order()
 			{
-				FirstName = model.FirstName,
+				FullName = model.FullName,
 				Phone = model.Phone,
 				Email = model.Email,
 				OrderDate = DateTime.Now
@@ -131,16 +132,19 @@ namespace Article.Services
 
 			model.Total = order.Total;
 
-			var gateway = new PaymentGateway();
-			var result = gateway.ProcessPayment(model);
+			//var gateway = new PaymentGateway();
+			//var result = gateway.ProcessPayment(model);
+
+			var result = new PaymentResult(RandomString(10), true, "success");
+			
 
 			if (result.Succeeded)
 			{
 				order.TransactionId = result.TransactionId;
 				_context.Orders.Add(order);
 				_context.CartItems.RemoveRange(items);
-				//await _context.SaveChangesAsync();
-				 _context.SaveChanges();
+				await _context.SaveChangesAsync();
+				//_context.SaveChanges();
 			}
 
 			return result;
@@ -167,6 +171,16 @@ namespace Article.Services
 			}
 
 			return cartId;
+		}
+
+
+
+		private static readonly Random _random = new Random();
+		public static string RandomString(int length)
+		{
+			const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			return new string(Enumerable.Repeat(chars, length)
+				.Select(s => s[_random.Next(s.Length)]).ToArray());
 		}
 	}
 }

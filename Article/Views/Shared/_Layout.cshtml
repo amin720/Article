@@ -42,16 +42,34 @@
                         <!-- Header Top Links -->
                         <div class="toplinks">
                             <div class="links">
-                                <div class="myaccount"><a title="حساب کاربر من" href="login.html"><span class="hidden-xs">حساب کاربر من</span></a></div>
-                                @*<div class="wishlist"><a title="My Wishlist"  href="wishlist.html"><span class="hidden-xs">Wishlist</span></a></div>*@
-                                <div class="check"><a title="اتمام خرید" href="@Url.Action("Checkout","ShoppingCart")"><span class="hidden-xs">اتمام خرید</span></a></div>
                                 @if (Request.IsAuthenticated)
                                 {
-                                    <div class="logout"><a title="خارج شدن" href="@Url.Action("Logout","Account")"><span class="hidden-xs">خروج کاربر @User.Identity.GetUserName()</span></a></div>
+                                    <div class="myaccount">
+                                        <a title="حساب کاربر من" href="/User/UserProfile/Index"><span class="hidden-xs">حساب کاربر من</span></a>
+                                    </div>
                                 }
                                 else
                                 {
-                                    <div class="login"><a title="وارد شدن" href="@Url.Action("Login","Account")"><span class="hidden-xs">وارد شدن</span></a></div>
+                                    <div class="myaccount">
+                                        <a title="حساب کاربر من" href="@Url.Action("Login", "Account")"><span class="hidden-xs">حساب کاربر من</span></a>
+                                    </div>
+                                }
+                                
+                                @*<div class="wishlist"><a title="My Wishlist"  href="wishlist.html"><span class="hidden-xs">Wishlist</span></a></div>*@
+                                <div class="check">
+                                    <a title="اتمام خرید" href="@Url.Action("Checkout", "ShoppingCart")"><span class="hidden-xs">اتمام خرید</span></a>
+                                </div>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <div class="logout">
+                                        <a title="خارج شدن" href="@Url.Action("Logout", "Account")"><span class="hidden-xs">خروج کاربر @User.Identity.GetUserName()</span></a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="login">
+                                        <a title="وارد شدن" href="@Url.Action("Login", "Account")"><span class="hidden-xs">وارد شدن</span></a>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -157,7 +175,7 @@
                             <a class="level-top" href="@Url.Action("Shop","Home")"><span>فروشگاه</span></a>
 
                             <!--level0-wrapper dropdown-6col-->
-                            <!--mega menu-->
+                            <!--mega menu1-->
 
                         </li>
                     </ul>
@@ -278,6 +296,13 @@
     <script type="text/javascript" src="~/assets/js/owl.carousel.min.js"></script>
     @RenderSection("main", false)
     @RenderSection("ProductDetail", false)
+@*<script>
+    $('li a').click(function (e) {
+        e.preventDefault();
+        $('a').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>*@
 </body>
 
 </html>

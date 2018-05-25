@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Article.Areas.Admin.ViewModels.UsersInRole>
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+    var counter = 1;
+}
+
+<div class="row" dir="rtl">
+    <div class="block full col-sm-12">
+        <div class="block-title">
+            <h2>دسته بندی ها</h2>
+        </div>
+        <div class="table-responsive" dir="ltr" id="tableElm">
+            <table id="example-datatable" class="table table-striped table-bordered table-vcenter">
+                <thead>
+                <tr class="text-center">
+                    <th style="width: 50px;">شماره</th>
+                    <th>نام نمایشی</th>
+                    <th>ایمیل</th>
+                    <th style="width: 120px;">نام کاربری</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var child in Model)
+                {
+                    <tr>
+                        <td class="text-center">@counter</td>
+                        <td class="text-center"><strong>@child.FullName</strong></td>
+                        <td class="text-center"><strong>@child.Email</strong></td>
+                        <td class="text-center"><strong>@child.Username</strong></td>
+                    </tr>
+                    counter++;
+                }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -58,6 +58,7 @@
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\IdentityClasses.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\TagRepository.cs" />

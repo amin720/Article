@@ -91,7 +91,7 @@
                         <!-- Sidebar Navigation -->
                         <ul class="sidebar-nav">
                             <li>
-                                <a href="@Url.Action("Index","Admin")"><i class="gi gi-compass sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">داشبرد</span></a>
+                                <a href="/User/UserProfile/Index"><i class="gi gi-compass sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">داشبرد</span></a>
                             </li>
                             <li class="sidebar-separator">
                                 <i class="fa fa-ellipsis-h"></i>
@@ -100,20 +100,14 @@
                                 <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-shopping_cart sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">محصولات</span></a>
                                 <ul>
                                     <li>
-                                        <a href="@Url.Action("CreateArticle","Product")">اضافه کردن مقاله</a>
+                                        <a href="/User/Product/CreateArticle">اضافه کردن مقاله</a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("CreateBook","Product")">اضافه کردن کتاب</a>
+                                        <a href="/User/Product/CreateBook">اضافه کردن کتاب</a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Index","Product")">لیست محصولات</a>
+                                        <a href="/User/Product/Index">لیست محصولات</a>
                                     </li>
-                                    <li>
-                                        <a href="@Url.Action("Index","Category")">دسته بندی</a>
-                                    </li>
-                                    @*<li>
-            <a href="Tags.html">بر چسپ</a>
-        </li>*@
                                 </ul>
                             </li>
                             <li class="sidebar-separator">
@@ -122,25 +116,12 @@
                             <li>
                                 <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">مشتریان</span></a>
                                 <ul>
-                                    @*<li>
-                                        <a href="@Url.Action("Customers","Report")">لیست مشتریان</a>
-                                    </li>*@
                                     <li>
-                                        <a href="@Url.Action("Index","Report")">فاکتور ها</a>
+                                        <a href="@Url.Action("Index","ReportUser")">فاکتور ها</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">کاربران</span></a>
-                                <ul>
-                                    <li>
-                                        <a href="@Url.Action("Index","User")">لیست کاربران</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Create","User")">اضافه کردن</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                         </ul>
                         <!-- END Sidebar Navigation -->
                         <!-- Color Themes -->
@@ -290,7 +271,7 @@
                     <!-- END Sidebar Content -->
                 </div>
                 <!-- END Wrapper for scrolling functionality -->
-                
+
             </div>
             <!-- END Main Sidebar -->
             <!-- Main Container -->
@@ -299,9 +280,12 @@
                 <header class="navbar navbar-inverse navbar-fixed-top">
                     <!-- Left Header Navigation -->
                     <ul class="nav navbar-nav-custom">
-                        @{Html.RenderAction("AdminMenu", new { controller = "Admin", area = "Admin" });
-                            Html.RenderAction("AuthenticationLink", new { controller = "Admin", area = "Admin" });
-                        }
+                        <li>
+                            <a href="/Home/Index">بازگشت به صفحه اصلی</a>
+                        </li>
+                        <li>
+                            <a href="/Account/Logout">خروج</a>
+                        </li>
                         <!-- Main Sidebar Toggle Button -->
                         <li>
                             <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">

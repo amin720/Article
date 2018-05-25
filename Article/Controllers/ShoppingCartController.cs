@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using Article.Core.Entities;
 using Article.Core.Interfaces;
 using Article.Infrastructure.Repository;
 using Article.Services;
 using Article.ViewModels;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -17,6 +20,7 @@ namespace Article.Controllers
 	{
 		private readonly IProductRepository _productRepository;
 		private readonly IUserRepository _userRepository;
+		private IList<string> _files;
 
 		public ShoppingCartController()
 			: this(new ProductRepository(), new UserRepository())
@@ -46,7 +50,7 @@ namespace Article.Controllers
 			var user = await GetloggedInUser();
 
 
-			await cart.AddAsync(productId,user.Id);
+			await cart.AddAsync(productId, user.Id);
 
 			var carts = await cart.GetCartItemsAsync(user.Id);
 
@@ -70,7 +74,7 @@ namespace Article.Controllers
 			var cart = new ShoppingCart(HttpContext);
 			var user = await GetloggedInUser();
 
-			await cart.RemoveAsync(productId,user.Id);
+			await cart.RemoveAsync(productId, user.Id);
 			var carts = await cart.GetCartItemsAsync(user.Id);
 
 
@@ -79,7 +83,7 @@ namespace Article.Controllers
 				CartItems = carts,
 				TotalPriceItems = CalcuateCartSubtotal(carts),
 				TotalPriceWithDiscount = CalcuateCartWithDiscount(carts)
-			}; 
+			};
 
 
 			//return Json(RedirectToAction("Dashboard", "Profile"),JsonRequestBehavior.DenyGet);
@@ -99,13 +103,14 @@ namespace Article.Controllers
 
 			var model = new CheckoutViewModel
 			{
-				FirstName = user.DisplayName,
+				FullName = user.DisplayName,
 				Email = user.Email,
 				CardNumber = "4111111111111111",
 				Phone = user.PhoneNumber,
 				Cvv = "124",
 				Month = "07",
 				Year = "2020",
+				UserId = user.Id,
 				CartItems = carts
 			};
 
@@ -117,13 +122,13 @@ namespace Article.Controllers
 		public async Task<ActionResult> Checkout(CheckoutViewModel model)
 		{
 			var user = await GetloggedInUser();
-			
+
 			model.Email = user.Email;
 			model.CardNumber = "4111111111111111";
 			model.Cvv = "124";
 			model.Month = "07";
 			model.Year = "2020";
-
+			model.UserId = user.Id;
 
 			if (!ModelState.IsValid)
 			{
@@ -132,17 +137,20 @@ namespace Article.Controllers
 
 			var cart = new ShoppingCart(HttpContext);
 
+			var carts = await cart.GetCartItemsAsync(user.Id);
+
+
+			_files = new List<string>();
+			foreach (var file in carts)
+			{
+				_files.Add(file.Product.FileUrl);
+			}
+
 			var result = await cart.CheckoutAsync(model);
-
-			//---- start
-
-			result.Succeeded = true;
-			result.TransactionId = RandomString(10);
-
-			//---- end
 
 			if (result.Succeeded)
 			{
+				TempData["Files"] = _files;
 				TempData["transactionId"] = result.TransactionId;
 				return RedirectToAction("Complete");
 			}
@@ -158,23 +166,24 @@ namespace Article.Controllers
 			var cart = new ShoppingCart(HttpContext);
 			var user = await GetloggedInUser();
 
-			var result = await cart.GetCartItemsAsync(user.Id);
+			//var result = await cart.GetCartItemsAsync(user.Id);
 
-			ViewBag.TransactionId = (string)TempData["transactionId"];
+			//ViewBag.TransactionId = (string)TempData["transactionId"];
 
-			var model = new CheckoutViewModel()
-			{
-				//FirstName = user.FirstName,
-				//LastName = user.LastName,
-				//Address = user.Address,
-				//PostalCode = user.PostalCode,
-				Phone = user.PhoneNumber,
-				CartItems = result,
-				Subtotal = CalcuateCartSubtotal(result),
-				Total = CalcuateCartWithDiscount(result)
-			};
+			//var model = new CheckoutViewModel()
+			//{
+			//	FirstName = user.DisplayName,
+			//	Email = user.Email,
+			//	UserId = user.Id,
+			//	Phone = user.PhoneNumber,
+			//	CartItems = result,
+			//	Subtotal = CalcuateCartSubtotal(result),
+			//	Total = CalcuateCartWithDiscount(result)
+			//};
 
-			return View(model: model, viewName: "Complete");
+
+			return RedirectToAction("Download","Download");
+			//return View(model: model, viewName: "Complete");
 		}
 
 		private static decimal CalcuateCartSubtotal(IEnumerable<CartItem> items)
@@ -205,6 +214,33 @@ namespace Article.Controllers
 			return total;
 		}
 
+		//public FileResult Download()
+		//{
+		//	var files = TempData["Files"] as IList<string>;
+
+		//	var archive = Server.MapPath("~/archive.zip");
+		//	var temp = Server.MapPath("~/temp");
+
+		//	// clear any existing archive
+		//	if (System.IO.File.Exists(archive))
+		//	{
+		//		System.IO.File.Delete(archive);
+		//	}
+		//	// empty the temp folder
+		//	Directory.EnumerateFiles(temp).ToList().ForEach(f => System.IO.File.Delete(f));
+
+		//	// copy the selected files to the temp folder
+		//	foreach (var file in files)
+		//	{
+		//		System.IO.File.Copy(Server.MapPath(file), Path.Combine(temp, path2: Path.GetFileName(file) ?? throw new InvalidOperationException()));
+
+		//	}
+		//	// create a new archive
+		//	ZipFile.CreateFromDirectory(temp, archive);
+
+		//	return File(archive, "application/zip", "archive.zip");
+		//}
+
 		#region Method
 
 		private bool _isDisposed;
@@ -224,6 +260,8 @@ namespace Article.Controllers
 			return await _userRepository.GetUserByNameAsync(User.Identity.Name);
 		}
 
+
+		
 
 		private static readonly Random _random = new Random();
 		public static string RandomString(int length)

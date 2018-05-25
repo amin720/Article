@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Article.Core.Entities.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminPage.cshtml";
+    var counter = 1;
+}
+
+<div class="row" dir="rtl">
+    <div class="block full col-sm-12">
+        <div class="block-title">
+            <h2>دسته بندی ها</h2>
+        </div>
+        <div class="table-responsive" dir="ltr" id="tableElm">
+            <table id="example-datatable" class="table table-striped table-bordered table-vcenter">
+                <thead>
+                    <tr class="text-center">
+                        <th style="width: 50px;">شماره</th>
+                        <th>تراکنش</th>
+                        <th>ایمیل</th>
+                        <th style="width: 120px;">مبلغ پرداختی</th>
+                        <th>تاریخ</th>
+                        <th class="text-center" style="width: 75px;"><i class="fa fa-flash"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var child in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@counter</td>
+                            <td class="text-center"><strong>@child.TransactionId</strong></td>
+                            <td class="text-center"><strong>@child.Email</strong></td>
+                            <td class="text-center"><strong>@child.Total</strong></td>
+                            <td class="text-center"><strong>@child.OrderDate.ToString("yyyy MMMM dd")</strong></td>
+
+                            <td class="text-center">
+                                <a href="@Url.Action("Detail", "Report", new { id = child.Id})" data-toggle="tooltip" title="مشاهده جزئیات" class="btn btn-effect-ripple btn-xs btn-success"><i class="fa fa-pencil"></i></a>
+                            </td>
+                        </tr>
+                        counter++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
